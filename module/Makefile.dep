@@ -1,0 +1,41 @@
+# Module dependencies
+array.mod: array.lo
+cache.lo: cache_generic.lo form_factor_type.lo precision_golem.lo \
+	sortie_erreur.lo
+cache.mod: cache.lo cache_generic.lo form_factor_type.lo precision_golem.lo \
+	sortie_erreur.lo
+cache_generic.lo: form_factor_type.lo precision_golem.lo sortie_erreur.lo
+cache_generic.mod: cache_generic.lo form_factor_type.lo precision_golem.lo \
+	sortie_erreur.lo
+constante.lo: precision_golem.lo
+constante.mod: constante.lo precision_golem.lo
+equal.lo: constante.lo parametre.lo precision_golem.lo sortie_erreur.lo
+equal.mod: equal.lo constante.lo parametre.lo precision_golem.lo sortie_erreur.lo
+form_factor_type.lo: constante.lo precision_golem.lo
+form_factor_type.mod: form_factor_type.lo constante.lo precision_golem.lo
+kronecker.mod: kronecker.lo
+multiply_div.lo: precision_golem.lo
+multiply_div.mod: multiply_div.lo precision_golem.lo
+parametre.lo: precision_golem.lo
+parametre.mod: parametre.lo precision_golem.lo
+precision_golem.mod: precision_golem.lo
+s_matrix_type.lo: constante.lo equal.lo precision_golem.lo sortie_erreur.lo
+s_matrix_type.mod: s_matrix_type.lo constante.lo equal.lo precision_golem.lo \
+	sortie_erreur.lo
+sortie_erreur.lo: array.lo parametre.lo precision_golem.lo
+sortie_erreur.mod: sortie_erreur.lo array.lo parametre.lo precision_golem.lo
+spinor.lo: constante.lo precision_golem.lo
+spinor.mod: spinor.lo constante.lo precision_golem.lo
+translate.lo: precision_golem.lo sortie_erreur.lo
+translate.mod: translate.lo precision_golem.lo sortie_erreur.lo
+tri.lo: precision_golem.lo
+tri_croissant.mod: tri.lo precision_golem.lo
+z_log.lo: constante.lo equal.lo precision_golem.lo sortie_erreur.lo
+logarithme.mod: z_log.lo constante.lo equal.lo precision_golem.lo sortie_erreur.lo
+zdilog.lo: constante.lo equal.lo parametre.lo precision_golem.lo \
+	sortie_erreur.lo z_log.lo
+dilogarithme.mod: zdilog.lo constante.lo equal.lo parametre.lo precision_golem.lo \
+	sortie_erreur.lo z_log.lo
+dilogarithme.mod: zdilog.lo
+tri_croissant.mod: tri.lo
+logarithme.mod: z_log.lo

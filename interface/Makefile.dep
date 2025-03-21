@@ -1,0 +1,12 @@
+# Module dependencies
+ga0.lo: tool_lt_to_golem.lo
+gb0.lo: tool_lt_to_golem.lo
+gc0.lo: tool_lt_to_golem.lo
+gd0.lo: tool_lt_to_golem.lo
+ge0.lo: tool_lt_to_golem.lo
+gf0.lo: tool_lt_to_golem.lo
+tens_comb.lo: tens_rec.lo
+tens_comb.mod: tens_comb.lo tens_rec.lo
+tens_rec.mod: tens_rec.lo
+tensor_integrals.mod: tensor_integrals.lo
+tool_lt_to_golem.mod: tool_lt_to_golem.lo

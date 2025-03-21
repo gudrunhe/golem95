@@ -1,0 +1,5 @@
+# Module dependencies
+adapt_gauss.mod numerical_evaluation.mod: mod_adapt_gauss.lo
+mod_numeric.lo: mod_adapt_gauss.lo
+numerical_evaluation.mod: mod_numeric.lo
+adapt_gauss.mod: mod_adapt_gauss.lo
