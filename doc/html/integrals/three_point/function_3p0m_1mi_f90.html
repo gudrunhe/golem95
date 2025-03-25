@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="../../robodoc.css" type="text/css" />
+<title>./../src/integrals/three_point/function_3p0m_1mi.f90</title>
+<!-- Source: ./../src/integrals/three_point/function_3p0m_1mi.f90 -->
+<!-- Generated with ROBODoc Version 4.99.42 (Dec 13 2013) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="../../toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="../../robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="../../masterindex.html#top">Index</a>
+<a class="menuitem" href="../../robo_generics.html#top">Generics</a>
+<a class="menuitem" href="../../robo_functions.html#top">Functions</a>
+<a class="menuitem" href="../../robo_modules.html#top">Modules</a>
+<a class="menuitem" href="../../robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="src2fintegral2fthree5fpoint2ffunction5f3p0m5f1mi"></a>
+<a name="robo8"></a><h2>src/integral/three_point/function_3p0m_1mi [ Modules ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../../robo_modules.html#robo_top_of_doc">Modules</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Module function_3p0m_1mi
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  use function_3p0m_1mi
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This module is used to compute the zero off-shell external leg one internal mass three point function
+  with/without Feynman parameters in n, n+2 dimensions
+</pre>
+<p class="item_name">OUTPUT</p>
+<pre>  This module exports two functions:
+  * f3p0m_1mi -- a function for the computation of the zero off-shell external leg one internal mass three 
+    point function with/without Feynman parameters in n dimensions
+  * f3p0m_1mi_np2 -- a function for the computation of the zero off-shell external leg one internal mass three 
+    point function with/without Feynman parameters in n+2 dimensions
+</pre>
+<p class="item_name">USES</p>
+<pre>  * precision (src/module/<a href="../../module/precision_golem_f90.html#robo_top_of_doc">precision_golem.f90</a>)
+  * logarithme (src/module/<a href="../../module/z_log_f90.html#robo_top_of_doc">z_log.f90</a>)
+  * sortie_erreur (src/module/<a href="../../module/sortie_erreur_f90.html#robo_top_of_doc">sortie_erreur.f90</a>) only : tab_erreur_par,catch_exception
+  * parametre (src/module/<a href="../../module/parametre_f90.html#robo_top_of_doc">parametre.f90</a>) only : rat_or_tot_par,mu2_scale_par
+  * array (src/module/<a href="../../module/array_f90.html#robo_top_of_doc">array.f90</a>) only : packb
+</pre>
+
+<hr />
+<a name="src2fintegral2fthree5fpoint2ffunction5f3p0m5f1mi2ff3p0m5f1mi"></a>
+<a name="robo537"></a><h2>src/integral/three_point/function_3p0m_1mi/f3p0m_1mi [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function f3p0m_1mi
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  real_dim6 = f3p0m_1mi(m3_sq,par1,par2,par3)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function computes the zero off-shell external leg one internal mass three point function in n dimensions
+  with up to three Feynman parameters in the numerator.
+  It returns an array of 6 reals corresponding to the real/imaginary
+  part of the coefficient of the 1/epsilon^2 term, real/imaginary part of the
+  coefficient of the 1/epsilon term and the real/imaginary part of the 
+  constant term.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * m3_sq -- real (type ki), the value of the internal mass squared
+  * par1 -- an integer, the label of the third Feynman parameter
+  * par2 -- an integer, the label of the second Feynman parameter
+  * par3 -- an integer, the label of the first Feynman parameter
+  Note that par1,par2 and par3 are supposed to be ordered, i.e.
+  par1 &lt;= par2 &lt;= par3, note also that put zero for par1, par2 or par3
+  if this Feynman parameter does not exist.
+  Use the routine tri_int(t_in,t_out) to order the labels in the module 
+  tri_croissant (src/module/<a href="../../module/tri_f90.html#robo_top_of_doc">tri.f90</a>)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  An real (type ki) array of rank 1 and shape 6 corresponding to 
+  the real/imaginary part of the coefficient of the 1/epsilon^2 term,
+  real/imaginary part of the coefficient of the 1/epsilon term
+  and the real/imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fintegral2fthree5fpoint2ffunction5f3p0m5f1mi2ff3p0m5f1mi5fnp2"></a>
+<a name="robo538"></a><h2>src/integral/three_point/function_3p0m_1mi/f3p0m_1mi_np2 [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function f3p0m_1mi_np2
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  real_dim4 = f3p0m_1mi_np2(m3_sq,par1,par2,par3)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function computes the zero off-shell external leg one internal mass three point function in n+2 dimensions. 
+  with up to one Feynman parameter in the numerator.
+  It retuns an array of 4 reals corresponding to the real/imaginary part of the
+  coefficient of the 1/epsilon term and the real/imaginary part of the 
+  constant term.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * m3_sq -- real (type ki), the value of the internal mass squared
+  * par1 -- an integer, the label of the third Feynman parameter = 0
+  * par2 -- an integer, the label of the second Feynman parameter = 0
+  * par3 -- an integer, the label of the first Feynman parameter
+  Note that par1,par2 and par3 are supposed to be ordered, i.e.
+  par1 &lt;= par2 &lt;= par3, note also that put zero for par1, par2 or par3
+  if this Feynman parameter does not exist.
+  Use the routine tri_int(t_in,t_out) to order the labels in the module 
+  tri_croissant (src/module/<a href="../../module/tri_f90.html#robo_top_of_doc">tri.f90</a>)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  An real (type ki) array of rank 1 and shape 4 corresponding to 
+  the real/imaginary part of the coefficient of the 1/epsilon term
+  and the real/imaginary part of the constant term. If par1 and/or par2
+  are different from zero, an error is returned.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./../src/integrals/three_point/function_3p0m_1mi.f90 with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.42 on Fri Dec 13 2013 22:31:47
+</p>
+</div> <!-- footer -->
+</body>
+</html>

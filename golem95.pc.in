@@ -1,0 +1,15 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@/@PACKAGE@
+
+Name: golem95
+Version: @VERSION@
+Description: GOLEM95: General One-Loop Evaluator for Matrix elements.
+             Golem95 is a form factor library for one-loop tensor
+             integrals.
+URL: http://lappweb.in2p3.fr/lapth/Golem/golem95.html
+
+Libs: -L${libdir} -l@GENERIC_LIBRARY_NAME@ -lavh_olo
+Libs.private: @LIBLOOPTOOLS@
+Cflags: -I${includedir}

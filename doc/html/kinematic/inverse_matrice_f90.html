@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="../robodoc.css" type="text/css" />
+<title>./../src/kinematic/inverse_matrice.f90</title>
+<!-- Source: ./../src/kinematic/inverse_matrice.f90 -->
+<!-- Generated with ROBODoc Version 4.99.42 (Dec 13 2013) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="../toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="../robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="../masterindex.html#top">Index</a>
+<a class="menuitem" href="../robo_generics.html#top">Generics</a>
+<a class="menuitem" href="../robo_functions.html#top">Functions</a>
+<a class="menuitem" href="../robo_modules.html#top">Modules</a>
+<a class="menuitem" href="../robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="src2fkinematic2finverse5fmatrice"></a>
+<a name="robo47"></a><h2>src/kinematic/inverse_matrice [ Modules ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_modules.html#robo_top_of_doc">Modules</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Module inverse_matrice
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  use inverse_matrice
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This module provides some routines and tools to inverse a n x n matrix. 
+</pre>
+<p class="item_name">OUTPUT</p>
+<pre>  This module exports two routines:
+  * inverse -- to inverse a nXn matrix
+  * imprime_mat -- to print a nXn matrix
+</pre>
+<p class="item_name">USES</p>
+<pre>  * precision (src/module/<a href="../module/precision_golem_f90.html#robo_top_of_doc">precision_golem.f90</a>)
+  * equal (src/module/<a href="../module/equal_f90.html#robo_top_of_doc">equal.f90</a>)
+  * s_matrix_type (src/module/<a href="../module/s_matrix_type_f90.html#robo_top_of_doc">s_matrix_type.f90</a>)
+  * constante (src/module/<a href="../module/constante_f90.html#robo_top_of_doc">constante.f90</a>)
+</pre>
+
+<hr />
+<a name="src2fkinematic2finverse5fmatrice2fimprime5fmat"></a>
+<a name="robo812"></a><h2>src/kinematic/inverse_matrice/imprime_mat [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Subroutine imprime_mat
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  call imprime_mat(mat)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This routine prints a n x n matrix
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * mat -- a real/complex (type ki) array of rank 2
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  No value returned
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre> WARNING: swapped lines and columns! mat(line, column)
+</pre>
+
+<hr />
+<a name="src2fkinematic2finverse5fmatrice2finverse"></a>
+<a name="robo813"></a><h2>src/kinematic/inverse_matrice/inverse [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Subroutine inverse
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  call inverse(mat,inv_mat,error,pinch1,pinch2,pinch3,pinch4,pinch5)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This routine first tries the Gauss method with partial pivoting strategy. 
+ If the error returned is too large (greater than the global variable accuracy_par),
+ then it switches to another method : the Greville method.
+ In the case of the Gauss method, if some reduced matrices need to be inverted, a new matrix is built
+ by removing the row(s) and column(s) pinch1,pinch2, etc. then the inverse is computed and the result returned
+ is a nXn matrix where the column(s) and row(s) pinch1, pinch2, etc. are filled by 0, the other elements
+ are those of the inverse computed. In the Greville method, the reduce matrix which is a nXn matrix
+ where the column(s) and row(s) pinch1, pinch2, etc. are filled by 0 is directly inverted.
+ Note that the error is computed in the following way:
+ first the matrix is rescaled : i. e. divided by the greatest (in absolute value) element
+ then the inverse is computed and the two matrices abs(1 - A^(-1) A) and abs(1 - A A^(-1)) are computed
+ the error is the greatest element of these two matrices.
+ In the case of the Greville method, the Moore_Penrose conditions are also tested
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * mat -- a real/complex (type ki) array of rank 2, or an s_matrix_poly type.
+  * pinch1 -- an integer (optional), specified a pinch
+  * pinch2 -- an integer (optional), specified a pinch
+  * pinch3 -- an integer (optional), specified a pinch
+  * pinch4 -- an integer (optional), specified a pinch
+  * pinch5 -- an integer (optional), specified a pinch
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  * inv_mat -- a real (type ki) array of rank 2, same shape, the inverse 
+               of the matrix mat
+  * error -- a real (type ki), the estimation of the error of the numerical inversion
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./../src/kinematic/inverse_matrice.f90 with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.42 on Fri Dec 13 2013 22:31:47
+</p>
+</div> <!-- footer -->
+</body>
+</html>

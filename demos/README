@@ -1,0 +1,65 @@
+An overview of the demo options is given in the file DemoContents
+
+
+To run the demos: 
+
+1) make sure the golem95 library has been installed correctly using
+     ./configure [options]
+     make
+     make install
+   from the main directory.
+
+   If you want to run demos/demo_LT, which is a Fortran 77 program,
+   make sure you have specified the correct options in running
+   configure. Either specify the Fortran compiler as both the
+   Fortran 90 and the Fortran 77 compiler.
+
+      ./configure [other-options] FC=gfortran F77=gfortran
+
+   It is also possible to choose the compilers differently
+   but linking becomes more involved and goes beyond the
+   scope of this README file.
+
+2) chdir to demos and type 'make' if you want to compile all demos
+   or add the name of the demo file if you want to run only one
+   demo file, e.g. 'make demo_4point'.
+
+   You can choose N-point functions for N=3,4,5 or 6, 
+   or calculate 4-photon helicity amplitudes,
+   or do some tests in a region where a kinematic determinant becomes small.
+   A list of all demo options is given in the file DemoContents.
+
+3) if you chose to calculate an N-point form factor,
+   you will be asked to give the rank of the integral resp. 
+   form factor you would like to calculate
+   
+   NOTE: 
+   For the demo programs, 
+   the numerical points have been fixed to some arbitrarily 
+   chosen value.
+   If the rank is nonzero, the program will pick a certain
+   Feynman parameter configuration for the numerator.
+   If you would like to choose a different configuration, 
+   you should either change the corresponding file 
+   demo_Npoint.f90 
+   or 
+   go to the directory "test", 
+   where you can choose the Feynman parameters in the numerator
+   and define the numerical point via an input file.
+   
+   We should mention that if the momentum squared p_i^2 of an external leg 
+   of an integral is of the order of machine precision, we set p^2 to zero.
+   Thus, when using quadruple precision, this cutoff is different from 
+   the one in double precision.
+   Therefore, if using demo_6point.f90 in quadruple precision, 
+   p_i^2 of the order of 10^-16 will be treated as off-shell legs
+   and thus the result will be different if the input momenta are 
+   unchanged, i.e. light-like in double precision only.
+  
+4) The results of the demo files are listed in the files called
+      "table_of_results*.txt" and "demo*.txt".
+       They allow the user to verify that his installation is running correctly.
+       
+       
+   
+   

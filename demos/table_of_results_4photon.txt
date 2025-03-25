@@ -1,0 +1,34 @@
+
+ 4-photon
+
+After a successful make in the demos directory, run ./demo_4photon for the four-photon result. This should be:
+
+
+ Four photon helicity amplitudes
+ ===============================
+ 
+ amp(++++)=
++ 1/epsilon^2 * (-.1776356839E-14 + I* 0.0000000000E+00)
++ 1/epsilon   * (-.1376676551E-13 + I* -.4440892099E-14)
++               (0.8000000000E+01 + I* 0.3552713679E-13)
+ 
+ amp(+++-)=
++ 1/epsilon^2 * (0.1304512054E-14 + I* 0.0000000000E+00)
++ 1/epsilon   * (-.1816602424E-13 + I* 0.5811323645E-15)
++               (-.8000000000E+01 + I* 0.2375920641E-14)
+ 
+ amp(++--)=
++ 1/epsilon^2 * (-.5551115123E-14 + I* 0.0000000000E+00)
++ 1/epsilon   * (-.1376676551E-13 + I* 0.0000000000E+00)
++               (-.7839488539E+02 + I* 0.3552713679E-13)
+ 
+ Analytical result:
+ ==================
+ 
+ amp(++++) = +8
+ amp(+++-) = -8
+ amp(++--) = -8*( + 1                                           
+                  + (t-u)/s*log(t/u)                            
+                  + (t**2+u**2)/2/s**2*( pi**2 + log(t/u)**2 ) )
+           =-.7839488539E+02
+ 

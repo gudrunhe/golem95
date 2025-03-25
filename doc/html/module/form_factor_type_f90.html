@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="../robodoc.css" type="text/css" />
+<title>./../src/module/form_factor_type.f90</title>
+<!-- Source: ./../src/module/form_factor_type.f90 -->
+<!-- Generated with ROBODoc Version 4.99.42 (Dec 13 2013) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="../toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="../robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="../masterindex.html#top">Index</a>
+<a class="menuitem" href="../robo_generics.html#top">Generics</a>
+<a class="menuitem" href="../robo_functions.html#top">Functions</a>
+<a class="menuitem" href="../robo_modules.html#top">Modules</a>
+<a class="menuitem" href="../robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="src2fmodule2fform5ffactor5ftype"></a>
+<a name="robo55"></a><h2>src/module/form_factor_type [ Modules ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_modules.html#robo_top_of_doc">Modules</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Module form_factor_type
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  use form_factor_type
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This module contains two type definitions : the form factors and
+  epsilon type. This module overloads the *, /, +, -, = and ** operators
+</pre>
+<p class="item_name">OUTPUT</p>
+<pre>  This module exports two types:
+  * form_factor -- define the type of the fom factors
+  * epsilon_type -- define the type for object having an epsilon expansion
+
+  five operators:
+  * * -- overload of the multiplication operator for form_factor and epsilon_type object
+  * / -- overload of the division operator for form_factor and epsilon_type object
+  * + -- overload of the addition operator for form_factor and epsilon_type object
+  * - -- overload of the subtraction operator for form_factor and epsilon_type object
+  * = -- overload of the assignment operator for form_factor and epsilon_type object
+  * ** -- overload of the power operator for form_factor and epsilon_type object
+</pre>
+<p class="item_name">USES</p>
+<pre>  * precision_golem (src/module/<a href="./precision_golem_f90.html#robo_top_of_doc">precision_golem.f90</a>)
+  * constante (src/module/<a href="./constante_f90.html#robo_top_of_doc">constante.f90</a>)
+</pre>
+
+<hr />
+<a name="src2fmodule2fform5ffactor5ftype2fassignment"></a>
+<a name="robo833"></a><h2>src/module/form_factor_type/assignment [ Generics ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>   ff = x -- Assignment to a form_factor
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">   interface assignment(=)
+</pre>
+<p class="item_name">NOTES</p>
+<pre>   In the assignment of a complex array the RHS must have the form
+      (/ a, b, c /).
+   In the assignment of a real array the RHS must have the form
+      (/ real(a), aimag(a), real(b), aimag(b), real(c), aimag(c) /).
+   The later form reflects the convention in the form factors of Golem90.
+</pre>
+
+<hr />
+<a name="src2fmodule2fform5ffactor5ftype2fdivision"></a>
+<a name="robo834"></a><h2>src/module/form_factor_type/division [ Generics ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>   ff / c -- Division of a form_factor by a scalar
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">   interface operator(/)
+</pre>
+
+<hr />
+<a name="src2fmodule2fform5ffactor5ftype2feps"></a>
+<a name="robo835"></a><h2>src/module/form_factor_type/eps [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>   eps -- singleton object of the epsilon-type.
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">   !   type(epsilon_type), parameter :: eps
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   type(epsilon_type), parameter :: eps = epsilon_type(1.0, 1)
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre>   type(form_factor) :: ff1 = a20((/.../))
+   type(form_factor) :: ff2 = eps * ff1
+</pre>
+
+<hr />
+<a name="src2fmodule2fform5ffactor5ftype2fepsilon5ftype"></a>
+<a name="robo836"></a><h2>src/module/form_factor_type/epsilon_type [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>   epsilon_type -- a type that represents positive
+     powers of epsilon
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">   !   type epsilon_type
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   type epsilon_type
+      complex(ki) :: coefficient
+      integer :: power
+   end type epsilon_type
+</pre>
+
+<hr />
+<a name="src2fmodule2fform5ffactor5ftype2fform5ffactor"></a>
+<a name="robo837"></a><h2>src/module/form_factor_type/form_factor [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>   form_factor -- represents the result of a form factor
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">   !   type form_factor
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">   type form_factor
+      complex(ki) :: a
+      complex(ki) :: b
+      complex(ki) :: c
+   end type form_factor
+</pre>
+<p class="item_name">NOTES</p>
+<pre>   * a is the coefficient of the 1/epsilon^2 pole
+   * b is the coefficient of the 1/epsilon pole
+   * c is the coefficient of the finite term
+</pre>
+
+<hr />
+<a name="src2fmodule2fform5ffactor5ftype2fmultiplication"></a>
+<a name="robo838"></a><h2>src/module/form_factor_type/multiplication [ Generics ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>   c * ff -- Multiplication of a form_factor with a scalar
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">   interface operator(*)
+</pre>
+
+<hr />
+<a name="src2fmodule2fform5ffactor5ftype2fsubtraction"></a>
+<a name="robo839"></a><h2>src/module/form_factor_type/subtraction [ Generics ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>   ff - x, - ff -- Subtractions involving form_factor(s)
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">   interface operator(-)
+</pre>
+
+<hr />
+<a name="src2fmodule2fform5ffactor5ftype2fsum"></a>
+<a name="robo840"></a><h2>src/module/form_factor_type/sum [ Generics ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_generics.html#robo_top_of_doc">Generics</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>   ff + x, + ff -- Sums involving form_factor(s)
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">   interface operator(+)
+</pre>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./../src/module/form_factor_type.f90 with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.42 on Fri Dec 13 2013 22:31:47
+</p>
+</div> <!-- footer -->
+</body>
+</html>

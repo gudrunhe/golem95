@@ -1,0 +1,920 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="../robodoc.css" type="text/css" />
+<title>./../src/form_factor/form_factor_5p.f90</title>
+<!-- Source: ./../src/form_factor/form_factor_5p.f90 -->
+<!-- Generated with ROBODoc Version 4.99.42 (Dec 13 2013) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="../toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="../robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="../masterindex.html#top">Index</a>
+<a class="menuitem" href="../robo_generics.html#top">Generics</a>
+<a class="menuitem" href="../robo_functions.html#top">Functions</a>
+<a class="menuitem" href="../robo_modules.html#top">Modules</a>
+<a class="menuitem" href="../robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p"></a>
+<a name="robo4"></a><h2>src/form_factor/form_factor_5p [ Modules ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_modules.html#robo_top_of_doc">Modules</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Module form_factor_5p
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  use form_factor_5p
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This module contains the different form factors for five point amplitudes.
+</pre>
+<p class="item_name">OUTPUT</p>
+<pre>  It exports twelve functions:
+  * a50 -- a function to compute A^{5,0}
+  * a51 -- a function to compute A^{5,1}
+  * a52 -- a function to compute A^{5,2}
+  * a53 -- a function to compute A^{5,3}
+  * a54 -- a function to compute A^{5,4}
+  * a55 -- a function to compute A^{5,5}
+  * b52 -- a function to compute B^{5,2}
+  * b53 -- a function to compute B^{5,3}
+  * b54 -- a function to compute B^{5,4}
+  * b55 -- a function to compute B^{5,5}
+  * c54 -- a function to compute C^{5,4}
+  * c55 -- a function to compute C^{5,5}
+
+  Note that a5xx, b5xx and c5xx are generic functions which can be called either with a
+  set of integers or with an integer whose bits represents the set
+</pre>
+<p class="item_name">USES</p>
+<pre>  * precision (src/module/<a href="../module/precision_golem_f90.html#robo_top_of_doc">precision_golem.f90</a>)
+  * generic_function_4p (src/integrals/four_point/<a href="../integrals/four_point/generic_function_4p_f90.html#robo_top_of_doc">generic_function_4p.f90</a>)
+  * generic_function_3p (src/integrals/three_point/<a href="../integrals/three_point/generic_function_3p_f90.html#robo_top_of_doc">generic_function_3p.f90</a>)
+  * matrice_s (src/kinematic/<a href="../kinematic/matrice_s_f90.html#robo_top_of_doc">matrice_s.f90</a>)
+  * array (src/module/<a href="../module/array_f90.html#robo_top_of_doc">array.f90</a>)
+  * sortie_erreur (src/module/<a href="../module/sortie_erreur_f90.html#robo_top_of_doc">sortie_erreur.f90</a>)
+  * multiply_div (src/module/<a href="../module/multiply_div_f90.html#robo_top_of_doc">multiply_div.f90</a>)
+  * form_factor_type (src/module/<a href="../module/form_factor_type_f90.html#robo_top_of_doc">form_factor_type.f90</a>)
+</pre>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fa505fb"></a>
+<a name="robo108"></a><h2>src/form_factor/form_factor_5p/a50_b [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function a50_b
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = a50_b(b_pin)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor A^{5,0}.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * b_pin -- an integer whose bits represent an array of integers of rank 1 corresponding 
+            to the label of the propagators pinched (removed from the original set
+            which is in the global variable b_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect, it uses the value of the global variables b_ref
+  and s_mat_p
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fa505fs"></a>
+<a name="robo109"></a><h2>src/form_factor/form_factor_5p/a50_s [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function a50_s
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = a50_s(set)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor A^{5,0}.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * set -- an array of integers of rank 1 corresponding to the label 
+          of the propagators pinched (removed from the original set
+          which is in the global variable set_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fa515fb"></a>
+<a name="robo110"></a><h2>src/form_factor/form_factor_5p/a51_b [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function a51_b
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = a51_b(l1,b_pin)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor A^{5,1}(l_1).
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * l1 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * b_pin -- an integer whose bits represent an array of integers of rank 1 corresponding 
+            to the label of the propagators pinched (removed from the original set
+            which is in the global variable b_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect, it uses the value of the global variables b_ref
+  and s_mat_p
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fa515fs"></a>
+<a name="robo111"></a><h2>src/form_factor/form_factor_5p/a51_s [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function a51_s
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = a51_s(l1,set)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor A^{5,1}(l_1).
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * l1 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * set -- an array of integers of rank 1 corresponding to the label 
+          of the propagators pinched (removed from the original set
+          which is in the global variable set_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fa525fb"></a>
+<a name="robo112"></a><h2>src/form_factor/form_factor_5p/a52_b [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function a52_b
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = a52_b(l1,l2,b_pin)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor A^{5,2}(l1,l2).
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * l1 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l2 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * b_pin -- an integer whose bits represent an array of integers of rank 1 corresponding 
+            to the label of the propagators pinched (removed from the original set
+            which is in the global variable b_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect, it uses the value of the global variables b_ref
+  and s_mat_p
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fa525fs"></a>
+<a name="robo113"></a><h2>src/form_factor/form_factor_5p/a52_s [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function a52_s
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = a52_s(l1,l2,set)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor A^{5,2}(l1,l2).
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * l1 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l2 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * set -- an array of integers of rank 1 corresponding to the label 
+          of the propagators pinched (removed from the original set
+          which is in the global variable set_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fa535fb"></a>
+<a name="robo114"></a><h2>src/form_factor/form_factor_5p/a53_b [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function a53_b
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = a53_b(l1,l2,l3,b_pin)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor A^{5,3}(l1,l2,l3).
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * l1 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l2 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l3 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * b_pin -- an integer whose bits represent an array of integers of rank 1 corresponding 
+            to the label of the propagators pinched (removed from the original set
+            which is in the global variable b_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect, it uses the value of the global variables b_ref
+  and s_mat_p
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fa535fs"></a>
+<a name="robo115"></a><h2>src/form_factor/form_factor_5p/a53_s [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function a53_s
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = a53_s(l1,l2,l3,set)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor A^{5,3}(l1,l2,l3).
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * l1 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l2 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l3 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * set -- an array of integers of rank 1 corresponding to the label 
+          of the propagators pinched (removed from the original set
+          which is in the global variable set_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fa545fb"></a>
+<a name="robo116"></a><h2>src/form_factor/form_factor_5p/a54_b [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function a54_b
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = a54_b(l1,l2,l3,l4,b_pin)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor A^{5,4}(l1,l2,l3,l4).
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * l1 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l2 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l3 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l4 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * b_pin -- an integer whose bits represent an array of integers of rank 1 corresponding 
+            to the label of the propagators pinched (removed from the original set
+            which is in the global variable b_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect, it uses the value of the global variables b_ref
+  and s_mat_p
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fa545fs"></a>
+<a name="robo117"></a><h2>src/form_factor/form_factor_5p/a54_s [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function a54_s
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = a54_s(l1,l2,l3,l4,set)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor A^{5,4}(l1,l2,l3,l4).
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * l1 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l2 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l3 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l4 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * set -- an array of integers of rank 1 corresponding to the label 
+          of the propagators pinched (removed from the original set
+          which is in the global variable set_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fa555fb"></a>
+<a name="robo118"></a><h2>src/form_factor/form_factor_5p/a55_b [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function a55_b
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = a55_b(l1,l2,l3,l4,l5,b_pin)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor A^{5,5}(l1,l2,l3,l4,l5).
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * l1 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l2 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l3 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l4 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l5 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * b_pin -- an integer whose bits represent an array of integers of rank 1 corresponding 
+            to the label of the propagators pinched (removed from the original set
+            which is in the global variable b_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect, it uses the value of the global variables b_ref
+  and s_mat_p
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fa555fs"></a>
+<a name="robo119"></a><h2>src/form_factor/form_factor_5p/a55_s [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function a55_s
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = a55_s(l1,l2,l3,l4,l5,set)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor A^{5,5}(l1,l2,l3,l4,l5).
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * l1 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l2 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l3 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l4 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l5 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * set -- an array of integers of rank 1 corresponding to the label 
+          of the propagators pinched (removed from the original set
+          which is in the global variable set_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fb525fb"></a>
+<a name="robo126"></a><h2>src/form_factor/form_factor_5p/b52_b [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function b52_b
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = b52_b(b_pin)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor B^{5,2}.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * b_pin -- an integer whose bits represent an array of integers of rank 1 corresponding 
+            to the label of the propagators pinched (removed from the original set
+            which is in the global variable b_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect, it uses the value of the global variables b_ref
+  and s_mat_p
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fb525fs"></a>
+<a name="robo127"></a><h2>src/form_factor/form_factor_5p/b52_s [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function b52_s
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = b52_s(set)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor B^{5,2}.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * set -- an array of integers of rank 1 corresponding to the label 
+          of the propagators pinched (removed from the original set
+          which is in the global variable set_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fb535fb"></a>
+<a name="robo128"></a><h2>src/form_factor/form_factor_5p/b53_b [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function b53_b
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = b53_b(l1,b_pin)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor B^{5,3}.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * l1 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * b_pin -- an integer whose bits represent an array of integers of rank 1 corresponding 
+            to the label of the propagators pinched (removed from the original set
+            which is in the global variable b_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect, it uses the value of the global variables b_ref
+  and s_mat_p
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fb535fs"></a>
+<a name="robo129"></a><h2>src/form_factor/form_factor_5p/b53_s [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function b53_s
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = b53_s(l1,set)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor B^{5,3}.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * l1 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * set -- an array of integers of rank 1 corresponding to the label 
+          of the propagators pinched (removed from the original set
+          which is in the global variable set_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fb545fb"></a>
+<a name="robo130"></a><h2>src/form_factor/form_factor_5p/b54_b [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function b54_b
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = b54_b(l1,l2,b_pin)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor B^{5,4}.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * l1 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l2 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * b_pin -- an integer whose bits represent an array of integers of rank 1 corresponding 
+            to the label of the propagators pinched (removed from the original set
+            which is in the global variable b_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect, it uses the value of the global variables b_ref
+  and s_mat_p
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fb545fs"></a>
+<a name="robo131"></a><h2>src/form_factor/form_factor_5p/b54_s [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function b54_s
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = b54_s(l1,l2,set)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor B^{5,4}.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * l1 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l2 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * set -- an array of integers of rank 1 corresponding to the label 
+          of the propagators pinched (removed from the original set
+          which is in the global variable set_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fb555fb"></a>
+<a name="robo132"></a><h2>src/form_factor/form_factor_5p/b55_b [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function b55_b
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = b55_b(l1,l2.l3,b_pin)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor B^{5,5}.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * l1 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l2 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l3 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * b_pin -- an integer whose bits represent an array of integers of rank 1 corresponding 
+            to the label of the propagators pinched (removed from the original set
+            which is in the global variable b_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect, it uses the value of the global variables b_ref
+  and s_mat_p
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fb555fs"></a>
+<a name="robo133"></a><h2>src/form_factor/form_factor_5p/b55_s [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function b55_s
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = b55_s(l1,l2.l3,set)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor B^{5,5}.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * l1 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l2 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * l3 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * set -- an array of integers of rank 1 corresponding to the label 
+          of the propagators pinched (removed from the original set
+          which is in the global variable set_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fc545fb"></a>
+<a name="robo134"></a><h2>src/form_factor/form_factor_5p/c54_b [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function c54_b
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = c54_b(b_pin)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor C^{5,4}.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * b_pin -- an integer whose bits represent an array of integers of rank 1 corresponding 
+            to the label of the propagators pinched (removed from the original set
+            which is in the global variable b_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect, it uses the value of the global variables b_ref
+  and s_mat_p
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fc545fs"></a>
+<a name="robo135"></a><h2>src/form_factor/form_factor_5p/c54_s [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function c54_s
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = c54_s(set)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor C^{5,4}.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * set -- an array of integers of rank 1 corresponding to the label 
+          of the propagators pinched (removed from the original set
+          which is in the global variable set_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fc555fb"></a>
+<a name="robo136"></a><h2>src/form_factor/form_factor_5p/c55_b [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function c55_b
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = c55_b(l1,b_pin)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor C^{5,5}.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * l1 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * b_pin -- an integer whose bits represent an array of integers of rank 1 corresponding 
+            to the label of the propagators pinched (removed from the original set
+            which is in the global variable b_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect, it uses the value of the global variables b_ref
+  and s_mat
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fform5ffactor2fform5ffactor5f5p2fc555fs"></a>
+<a name="robo137"></a><h2>src/form_factor/form_factor_5p/c55_s [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function c55_s
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  type(form_factor) = c55_s(l1,set)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function defines the form factor C^{5,5}.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre> * l1 -- an integer corresponding to a label in the set of the three 
+         remaining propagators
+ * set -- an array of integers of rank 1 corresponding to the label 
+          of the propagators pinched (removed from the original set
+          which is in the global variable set_ref)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  The result returned is of the type form_factor
+  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./../src/form_factor/form_factor_5p.f90 with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.42 on Fri Dec 13 2013 22:31:47
+</p>
+</div> <!-- footer -->
+</body>
+</html>

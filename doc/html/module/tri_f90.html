@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="../robodoc.css" type="text/css" />
+<title>./../src/module/tri.f90</title>
+<!-- Source: ./../src/module/tri.f90 -->
+<!-- Generated with ROBODoc Version 4.99.42 (Dec 13 2013) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="../toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="../robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="../masterindex.html#top">Index</a>
+<a class="menuitem" href="../robo_generics.html#top">Generics</a>
+<a class="menuitem" href="../robo_functions.html#top">Functions</a>
+<a class="menuitem" href="../robo_modules.html#top">Modules</a>
+<a class="menuitem" href="../robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="src2fmodule2ftri5fcroissant"></a>
+<a name="robo65"></a><h2>src/module/tri_croissant [ Modules ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_modules.html#robo_top_of_doc">Modules</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Module tri_croissant
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  use tri_croissant
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This module is used to sort an integer array or shift its elements by certain amount
+</pre>
+<p class="item_name">OUTPUT</p>
+<pre>  This module exports:
+  * tri_int -- a subroutine to sort out an integer array
+  * shift_param -- a subroutine to shift (modulo n) the elements of an integer array
+</pre>
+<p class="item_name">USES</p>
+<pre>  * precision_golem (src/module/<a href="./precision_golem_f90.html#robo_top_of_doc">precision_golem.f90</a>)
+</pre>
+
+<hr />
+<a name="src2fmodule2ftri5fcroissant2fexchange5fparam"></a>
+<a name="robo871"></a><h2>src/module/tri_croissant/exchange_param [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Subroutine exchange_param
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  call exchange_param(z_param_ini,tab,modd,z_param_out)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This routine exchanges in the array z_param_ini of Feynman parameters
+  the label tab(1) with the label tab(2)
+  the result is put into the array z_param_out
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * z_param_ini -- an integer array of rank 1, the array to shift
+  * tab -- an integer array of rank 1, the two labels to exchange
+  * modd -- an integer, the shift is made modulo modd
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  * z_param_out -- an integer array of rank 1, the shifted array
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fmodule2ftri5fcroissant2fshift5fparam"></a>
+<a name="robo872"></a><h2>src/module/tri_croissant/shift_param [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Subroutine shift_param
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  call shift_param(z_param_ini,shift,modd,z_param_out)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This routine shifts the array z_param_ini of Feynman parameters
+  the shift is done as following: 
+  z --&gt; z+shift if z+shift &lt;= modd 
+  else mod(z+shift-1,modd)+1 if z+shift &gt; modd
+  the result is put into the array z_param_out
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * z_param_ini -- an integer array of rank 1, the array to shift
+  * shift -- an integer, the value of the shift
+  * modd -- an integer, the shift is made modulo modd
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  * z_param_out -- an integer array of rank 1, the shifted array
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fmodule2ftri5fcroissant2ftri5fint"></a>
+<a name="robo873"></a><h2>src/module/tri_croissant/tri_int [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Subroutine tri_int
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  call tri_int(t_in,t_out)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This routine sorts in increasing order an integer array t_int and put the 
+  result in the integer array t_out
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * t_int -- an integer array of rank 1, the array to sort
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>     NONE
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  * t_out -- an integer array of rank 1, the sorted array
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./../src/module/tri.f90 with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.42 on Fri Dec 13 2013 22:31:47
+</p>
+</div> <!-- footer -->
+</body>
+</html>

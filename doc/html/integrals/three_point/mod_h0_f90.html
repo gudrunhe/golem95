@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="../../robodoc.css" type="text/css" />
+<title>./../src/integrals/three_point/mod_h0.f90</title>
+<!-- Source: ./../src/integrals/three_point/mod_h0.f90 -->
+<!-- Generated with ROBODoc Version 4.99.42 (Dec 13 2013) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="../../toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="../../robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="../../masterindex.html#top">Index</a>
+<a class="menuitem" href="../../robo_generics.html#top">Generics</a>
+<a class="menuitem" href="../../robo_functions.html#top">Functions</a>
+<a class="menuitem" href="../../robo_modules.html#top">Modules</a>
+<a class="menuitem" href="../../robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="src2fintegrals2fthree5fpoint2ffunc5fh0"></a>
+<a name="robo37"></a><h2>src/integrals/three_point/func_h0 [ Modules ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../../robo_modules.html#robo_top_of_doc">Modules</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Module func_h0
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  use func_h0
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This module is specific for the function h0 defined
+  by h0(x,alpha) = (-x-i lambda)^(alpha)/x
+  with alpha &lt;&lt; 1. The three functions h0d, h0e and h0f
+  are defined as:
+  h0(x,alpha) = h0d(x) + alpha h0e(x) + alpha^2 h0f(x)
+</pre>
+<p class="item_name">OUTPUT</p>
+<pre>  This module exports three functions:
+  * h0d -- function
+  * h0e -- function
+  * h0f -- function
+</pre>
+<p class="item_name">USES</p>
+<pre>  * precision (src/module/<a href="../../module/precision_golem_f90.html#robo_top_of_doc">precision_golem.f90</a>)
+  * parametre (src/module/<a href="../../module/parametre_f90.html#robo_top_of_doc">parametre.f90</a>)
+  * logarithme (src/module/<a href="../../module/z_log_f90.html#robo_top_of_doc">z_log.f90</a>)
+  * sortie_erreur (src/module/<a href="../../module/sortie_erreur_f90.html#robo_top_of_doc">sortie_erreur.f90</a>)
+</pre>
+
+<hr />
+<a name="src2fintegrals2fthree5fpoint2ffunc5fh02fh0d"></a>
+<a name="robo610"></a><h2>src/integrals/three_point/func_h0/h0d [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function h0d
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  real_dim2 = h0d(x)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  Compute the function 1/x
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * x -- a real (type ki)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  It returns a real (type ki) array of rank 1 and shape 2
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fintegrals2fthree5fpoint2ffunc5fh02fh0e"></a>
+<a name="robo611"></a><h2>src/integrals/three_point/func_h0/h0e [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function h0e
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  real_dim2 = h0e(x)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  Compute the function ln(-x)/x
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * x -- a real (type ki)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect, the returned value depends on the global variable rat_or_tot_par
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  It returns a real (type ki) array of rank 1 and shape 2
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fintegrals2fthree5fpoint2ffunc5fh02fh0f"></a>
+<a name="robo612"></a><h2>src/integrals/three_point/func_h0/h0f [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function h0f
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  real_dim2 = h0f(x)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  Compute the function 1/2 ln(-x)^2/x
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * x -- a real (type ki)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect, the returned value depends on the global variable rat_or_tot_par
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  It returns a real (type ki) array of rank 1 and shape 2
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./../src/integrals/three_point/mod_h0.f90 with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.42 on Fri Dec 13 2013 22:31:47
+</p>
+</div> <!-- footer -->
+</body>
+</html>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="../robodoc.css" type="text/css" />
+<title>./../src/module/s_matrix_type.f90</title>
+<!-- Source: ./../src/module/s_matrix_type.f90 -->
+<!-- Generated with ROBODoc Version 4.99.42 (Dec 13 2013) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="../toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="../robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="../masterindex.html#top">Index</a>
+<a class="menuitem" href="../robo_generics.html#top">Generics</a>
+<a class="menuitem" href="../robo_functions.html#top">Functions</a>
+<a class="menuitem" href="../robo_modules.html#top">Modules</a>
+<a class="menuitem" href="../robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="src2fmodule2fs5fmatrix5ftype"></a>
+<a name="robo61"></a><h2>src/module/s_matrix_type [ Modules ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_modules.html#robo_top_of_doc">Modules</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Module s_matrix_type
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  use s_matrix_type
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This module contains a type definition for the kinematic s_matrix, 
+  intended to mimic a run-time polymorphism.
+</pre>
+<p class="item_name">OUTPUT</p>
+<pre>  This module exports the derived type:
+  * s_matrix_poly 
+
+  One function:
+  * assign_s_matrix -- associates the pointers in the s_matrix to a given real or complex matrix
+   
+  Subroutines:
+  * nullify_s_matrix -- nullifies the pointers
+  * set_s_matrix_bits -- sets an integer which describes the positions of complex masses in the s matrix.
+                         sets an integer which describes the positions of zero mass entries.
+  * fill_s_matrix -- fills the real array associated with a complex array.
+</pre>
+<p class="item_name">USES</p>
+<pre>  * precision_golem (src/module/preci_double.f90)
+  * sortie_erreur (src/module/<a href="./sortie_erreur_f90.html#robo_top_of_doc">sortie_erreur.f90</a>)
+  * equal (src/module/<a href="./equal_f90.html#robo_top_of_doc">equal.f90</a>)
+  * constante (src/module/<a href="./constante_f90.html#robo_top_of_doc">constante.f90</a>)
+</pre>
+
+<hr />
+<a name="src2fmodule2fs5fmatrix5ftype2fassign5fs5fmatrix"></a>
+<a name="robo855"></a><h2>src/module/s_matrix_type/assign_s_matrix [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  assign_s_matrix
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  assign_s_matrix(s_mat_r)
+  assign_s_matrix(s_mat_c,s_mat_r)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function associates the global (type s_matrix_poly) s_mat_p
+  with the given real or complex input matrix. In the case a complex
+  matrix is given, a real matrix, which will contain the real part of the 
+  complex matrix, has also be given as an argument.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  A real and a complex matrix. Or just a real matrix.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  a type (s_matrix_poly) is returned.
+</pre>
+
+<hr />
+<a name="src2fmodule2fs5fmatrix5ftype2ffill5fs5fmatrix"></a>
+<a name="robo856"></a><h2>src/module/s_matrix_type/fill_s_matrix [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Subroutine fill_s_matrix
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  call fill_s_matrix(s_mat_p)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This procedure fills the associated real array with the
+  real entries of a complex s_matrix if the corresponding
+  pointer to the complex array is associated.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  *  a type (s_matrix_poly) object
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  none
+</pre>
+
+<hr />
+<a name="src2fmodule2fs5fmatrix5ftype2fnullify5fs5fmatrix"></a>
+<a name="robo857"></a><h2>src/module/s_matrix_type/nullify_s_matrix [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Subroutine nullify_s_matrix
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  nullify_s_matrix(s_mat_p)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This procedure nullifies the pointers in the input object.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  *  type (s_matrix_poly) object
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  none
+</pre>
+
+<hr />
+<a name="src2fmodule2fs5fmatrix5ftype2fs5fmatrix5fpoly"></a>
+<a name="robo858"></a><h2>src/module/s_matrix_type/s_matrix_poly [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>   s_matrix_poly
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">  !   type s_matrix_poly
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">  type s_matrix_poly
+     !
+     real(ki), dimension(:,:), pointer :: pt_real
+     complex(ki), dimension(:,:), pointer :: pt_cmplx
+     integer :: b_cmplx, b_zero
+     !
+  end type s_matrix_poly
+</pre>
+<p class="item_name">NOTES</p>
+<pre>   * pt_real points to a real array (s_mat_r) if associated.
+   * pt_cmplx points to a complex array (s_mat_c) if associated
+   * b_cmplx is a bit-integer encoding the positions of 
+     complex mass entries in the S matrix.
+   * b_zero is a bit-integer encoding the positions of
+     vanishing masses.
+</pre>
+
+<hr />
+<a name="src2fmodule2fs5fmatrix5ftype2fset5fs5fmatrix5fbits"></a>
+<a name="robo859"></a><h2>src/module/s_matrix_type/set_s_matrix_bits [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Subroutine set_s_matrix_bits
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  call set_s_matrix_bits(s_mat_p,set_ref)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This procedure checks the diagonal of the given matrix for complex
+  entries with non-vanishing imaginary part and vanishing masses as well.
+  The results are encoded in bit-integers included in the derived type s_mat_p. 
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  *  a type (s_matrix_poly) object
+  *  a reference set of numbers associated with the diagonal entries.
+     (typically an array (/1,2,...,n/) ).
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  none
+</pre>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./../src/module/s_matrix_type.f90 with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.42 on Fri Dec 13 2013 22:31:47
+</p>
+</div> <!-- footer -->
+</body>
+</html>

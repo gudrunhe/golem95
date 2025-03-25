@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="../robodoc.css" type="text/css" />
+<title>./../src/module/z_log.f90</title>
+<!-- Source: ./../src/module/z_log.f90 -->
+<!-- Generated with ROBODoc Version 4.99.42 (Dec 13 2013) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="../toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="../robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="../masterindex.html#top">Index</a>
+<a class="menuitem" href="../robo_generics.html#top">Generics</a>
+<a class="menuitem" href="../robo_functions.html#top">Functions</a>
+<a class="menuitem" href="../robo_modules.html#top">Modules</a>
+<a class="menuitem" href="../robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="src2fmodule2flogarithme"></a>
+<a name="robo57"></a><h2>src/module/logarithme [ Modules ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_modules.html#robo_top_of_doc">Modules</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Module logarithme
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  use logarithme
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This module provides three public routines to compute the logarithm,
+  the logarithm squared and a special function (generalisation of ln(1-z)/z) 
+  assuming that the argument is of the type z = a + i lambda s, where
+  lambda &gt; 0 and &lt;&lt; 1 and s = +/- 1. a can be a complex type. If its
+  imaginary part vanishes, the sign of s becomes relevant.
+</pre>
+<p class="item_name">OUTPUT</p>
+<pre>  It exports:
+  * z_log -- a function which returns the logarithm with a complex argument
+  * z_log2 -- a function which returns the logarithm squared with a complex argument
+  * q -- a recursive function which a generalisation of ln(1-z)/z
+</pre>
+<p class="item_name">NOTES</p>
+<pre>  z_log (and z_log2) can be called with complex argument and parameter s. If the imaginary part vanishes,
+  z_log (or z_log2) with real argument is called. Here, s becomes important.
+</pre>
+<p class="item_name">USES</p>
+<pre>  * precision_golem (src/module/<a href="./precision_golem_f90.html#robo_top_of_doc">precision_golem.f90</a>)
+  * constante (src/module/<a href="./constante_f90.html#robo_top_of_doc">constante.f90</a>)
+  * sortie_erreur (src/module/<a href="./sortie_erreur_f90.html#robo_top_of_doc">sortie_erreur.f90</a>)
+  * equal (src/module/<a href="./equal_f90.html#robo_top_of_doc">equal.f90</a>)
+</pre>
+
+<hr />
+<a name="src2fmodule2flogarithme2feta"></a>
+<a name="robo844"></a><h2>src/module/logarithme/eta [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function eta
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex = eta(x,y,z)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  It computes the function eta defined by
+  eta(x,y) - ln(x*y) - ln(x) - ln(y)
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * x -- a complex (type ki)
+  * y -- a complex (type ki)
+  * z -- optional, a complex (type ki) : product x*y
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  This function returns a complex (type ki)
+</pre>
+<p class="item_name">NOTES</p>
+
+<hr />
+<a name="src2fmodule2flogarithme2feta5fmod"></a>
+<a name="robo845"></a><h2>src/module/logarithme/eta_mod [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function eta_mod
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex = eta_mod(im1,im2,imt)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  It computes the function eta defined by
+  eta(x,y) - ln(x*y) - ln(x) - ln(y)
+  the argument are Re(x), Im(x), Re(y), Im(y) and Im(x*y)
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * re1 -- a real (type ki)
+  * im2 -- a complex (type ki)
+  * re2 -- a real (type ki)
+  * im2 -- a complex (type ki)
+  * imt -- a complex (type ki)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  This function returns a complex (type ki)
+</pre>
+<p class="item_name">NOTES</p>
+
+<hr />
+<a name="src2fmodule2flogarithme2fq"></a>
+<a name="robo846"></a><h2>src/module/logarithme/q [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function q
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex = q(n,x,s)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  It computes the function q defined recusively by
+  q_n(X) = (q_{n-1}(X)+1/(n-1))/X 
+  with q_1(X) = ln(1-X)/X 
+  assuming that X = x + i*s*lambda and s=+/- 1, 
+  Care is taken for small values of x.
+  For x &lt; small_glob
+  q_n(x) = -( 1/n + \sum_{j=n+1}^\infinity x^{j-n}/j )
+  Note that in this case there is no imaginary part.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * n -- an integer, the order of q
+  * x -- a real/complex (type ki), the real part
+  * s -- a real (type ki), s = +/- 1, it gives the sign of the small imaginary part
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  This function returns a complex (type ki)
+</pre>
+<p class="item_name">NOTES</p>
+<pre>  This function can now be called with complex x. If the imaginary part vanishes,
+  the evaluation is switched to the version with real x and the original entry for 
+  s becomes relevant.
+</pre>
+
+<hr />
+<a name="src2fmodule2flogarithme2fz5flog"></a>
+<a name="robo847"></a><h2>src/module/logarithme/z_log [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function z_log
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex = z_log(a,s)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  Compute the ln(z) with z = a + i lambda s
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * a -- a real/complex (type ki), the argument
+  * s -- a real (type ki), s = +/- 1, it gives the sign of the small imaginary part
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  This function returns a complex (type ki)
+</pre>
+<p class="item_name">NOTES</p>
+<pre>  If the imaginary part of the argument vanishes, the sign of s becomes relevant.
+</pre>
+
+<hr />
+<a name="src2fmodule2flogarithme2fz5flog2"></a>
+<a name="robo848"></a><h2>src/module/logarithme/z_log2 [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function z_log2
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex = z_log2(a,s)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  Compute the ln(z)^2 with z = a + i lambda s
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * a -- a real/complex (type ki), the argument
+  * s -- a real (type ki), s = +/- 1, it gives the sign of the small imaginary part
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  This function returns a complex (type ki)
+</pre>
+<p class="item_name">NOTES</p>
+<pre>  If the imaginary part of the argument vanishes, the sign of s becomes relevant.
+</pre>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./../src/module/z_log.f90 with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.42 on Fri Dec 13 2013 22:31:47
+</p>
+</div> <!-- footer -->
+</body>
+</html>

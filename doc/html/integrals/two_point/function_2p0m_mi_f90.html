@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="../../robodoc.css" type="text/css" />
+<title>./../src/integrals/two_point/function_2p0m_mi.f90</title>
+<!-- Source: ./../src/integrals/two_point/function_2p0m_mi.f90 -->
+<!-- Generated with ROBODoc Version 4.99.40 (Jun  3 2010) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="../../toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="../../robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="../../masterindex.html#top">Index</a>
+<a class="menuitem" href="../../robo_generics.html#top">Generics</a>
+<a class="menuitem" href="../../robo_functions.html#top">Functions</a>
+<a class="menuitem" href="../../robo_modules.html#top">Modules</a>
+<a class="menuitem" href="../../robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="src2fintegral2ftwo5fpoint2ffunction5f2p0m"></a>
+<a name="robo14"></a><h2>src/integral/two_point/function_2p0m [ Modules ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../../robo_modules.html#robo_top_of_doc">Modules</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Module function_2p0m
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  use function_2p0m
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This module is used to compute the two-point function
+  with zero momentum and two equal masses: I_2(0,m^2,m^2)
+  and the two-point function
+  with zero momentum and two different masses: I_2(0,m1^2,m2^2)
+  with/without Feynman parameters in n dimensions
+</pre>
+<p class="item_name">OUTPUT</p>
+<pre>  This module exports the functions:
+  * f2p0m_1mi -- a function for the computation of the 
+  two-point integrals
+  with zero momentum and two equal masses: I2({j})(0,m^2,m^2)
+  with/without Feynman parameters, in n dimensions
+
+  * f2p0m_m1m2 -- a function for the computation of the 
+  two-point integrals
+  with zero momentum and two different masses: I2({j})(0,m1^2,m2^2)
+  with/without Feynman parameters, in n dimensions
+
+  scalar functions:
+
+  i20m1: computes the scalar two point function
+  with zero momentum and one propagator having nonzero mass: 
+  I_2^n(0,0,m^2)
+
+  i20mm: computes the scalar two point function
+  with zero momentum and two massive propagators 
+  with equal masses: I_2^n(0,m^2,m^2)
+
+  i20m1m2: computes the scalar two point function
+  with zero momentum and two massive propagators 
+  with different masses: I_2^n(0,m1^2,m2^2)
+</pre>
+<p class="item_name">USES</p>
+<pre>  * precision (src/module/preci_double.f90)
+  * logarithme (src/module/<a href="../../module/z_log_f90.html#robo_top_of_doc">z_log.f90</a>)
+  * sortie_erreur (src/module/<a href="../../module/sortie_erreur_f90.html#robo_top_of_doc">sortie_erreur.f90</a>)
+</pre>
+
+<hr />
+<a name="src2fintegral2ftwo5fpoint2ffunction5f2p0m2ff2p0m5f1mi"></a>
+<a name="robo156"></a><h2>src/integral/two_point/function_2p0m/f2p0m_1mi [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function f2p0m_1mi
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  real_dim6 = f2p0m_1mi(msq,par1,par2)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function computes the two point function in n dimensions
+  with zero momentum and two massive propagators with m1=m2
+  with up to two Feynman parameters in the numerator.
+  It retuns an array of 4 reals corresponding to the
+   real/imaginary part of the coefficient of the 1/epsilon term 
+   and the real/imaginary part of the constant term.
+ 
+ corresponds to eqs.(A.9),(A.10) in hep-ph/0504267
+ note overall minus sign has to be corrected in first line of (A.10)
+ note also that for rank one A_j^{2,1}=MINUS I_2(j,...)
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * m1_sq -- real (type ki), the value of the mass
+  * par1 -- an integer, the label of one Feynman parameter
+  * par2 -- an integer, the label of the second Feynman parameter
+  Note that par1,par2 are ordered internally, i.e.
+  par1 &lt;= par2, note also to use zero for par1, par2 
+  if this Feynman parameter does not exist.
+  Use the routine tri_int(t_in,t_out) to order the labels in the module 
+  tri_croissant (src/module/<a href="../../module/tri_f90.html#robo_top_of_doc">tri.f90</a>)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  An real (type ki) array of rank 1 and shape 4 corresponding to 
+  the real/imaginary part of the coefficient of the coefficient 
+  of the 1/epsilon term
+  and the real/imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre> light-like-momentum two point function without Feynman parameters 
+ f2p0m_1mi(msq,0,0) 
+ with one Feynman parameter in the numerator z_1 
+ f2p0m_1mi(msq,0,1)
+ with two Feynman parameters in the numerator z_2**2
+ f2p0m_1mi(msq,2,2) 
+ with two Feynman parameters in the numerator z1*z_2
+ f2p0m_1mi(msq,1,2) 
+</pre>
+
+<hr />
+<a name="src2fintegral2ftwo5fpoint2ffunction5f2p0m2ff2p0m5fm1m2"></a>
+<a name="robo157"></a><h2>src/integral/two_point/function_2p0m/f2p0m_m1m2 [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function f2p0m_m1m2
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  real_dim6 = f2p0m_m1m2(m1sq,m2sq,par1,par2)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function computes the two point function in n dimensions
+  with zero momentum and two massive propagators with m1 not= m2
+  with up to two Feynman parameters in the numerator.
+  It retuns an array of 6 reals corresponding to the real/imaginary
+  part of the coefficient of the 1/epsilon**2 term, real/imaginary part of the
+  coefficient of the 1/epsilon term and the real/imaginary part of the 
+  constant term.
+ corresponds to eqs.(A.8) in hep-ph/0504267
+  note that for rank one A_j^{2,1}=MINUS I_2(j,...)
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * m1_sq,m2_sq -- real (type ki), the values of the masses
+  * par1 -- an integer, the label of one Feynman parameter
+  * par2 -- an integer, the label of the second Feynman parameter
+  Note that par1,par2 are ordered internally, i.e.
+  par1 &lt;= par2, note also to use zero for par1, par2 
+  if this Feynman parameter does not exist.
+  Use the routine tri_int(t_in,t_out) to order the labels in the module 
+  tri_croissant (src/module/<a href="../../module/tri_f90.html#robo_top_of_doc">tri.f90</a>)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  An real (type ki) array of rank 1 and shape 6 corresponding to 
+  the real/imaginary part of the coefficient of the 1/epsilon**2 term,
+  real/imaginary part of the coefficient of the 1/epsilon term
+  and the real/imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre> light-like-momentum two point function without Feynman parameters 
+ f2p0m_m1m2(m1sq,m2sq,0,0) 
+ with one Feynman parameter in the numerator z_1 
+ f2p0m_m1m2(m1sq,m2sq,0,1)
+ with two Feynman parameters in the numerator z_2**2
+ f2p0m_m1m2(m1sq,m2sq,2,2) 
+ with two Feynman parameters in the numerator z1*z_2
+ f2p0m_m1m2(m1sq,m2sq,1,2) 
+</pre>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./../src/integrals/two_point/function_2p0m_mi.f90 with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.40 on Thu Jun 17 2010 17:24:50
+</p>
+</div> <!-- footer -->
+</body>
+</html>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="../robodoc.css" type="text/css" />
+<title>./../src/interface/gf0.f90</title>
+<!-- Source: ./../src/interface/gf0.f90 -->
+<!-- Generated with ROBODoc Version 4.99.42 (Dec 13 2013) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="../toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="../robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="../masterindex.html#top">Index</a>
+<a class="menuitem" href="../robo_generics.html#top">Generics</a>
+<a class="menuitem" href="../robo_functions.html#top">Functions</a>
+<a class="menuitem" href="../robo_modules.html#top">Modules</a>
+<a class="menuitem" href="../robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="src2finterface2fgf0"></a>
+<a name="robo642"></a><h2>src/interface/gf0 [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function gf0
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex = gf0(s1,s2,s3,s4,s5,s6,s12,s23,s34,s45,s56,s61,s123,s234,s345,m1,m2,m3,m4,m5,m6,mu2,eps_flag)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function is the scalar F0 function. 
+  The last two arguments are the renormalisation 
+  scale squared and a flag which selects the coefficient of 
+  the Laurent series in epsilon
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * s1 -- a real (type ki), p1^2
+  * s2 -- a real (type ki), p2^2
+  * s3 -- a real (type ki), p3^2
+  * s4 -- a real (type ki), p4^2
+  * s5 -- a real (type ki), p5^2
+  * s6 -- a real (type ki), p6^2
+  * s12 -- a real (type ki), (p1+p2)^2
+  * s23 -- a real (type ki), (p2+p3)^2
+  * s34 -- a real (type ki), (p3+p4)^2
+  * s45 -- a real (type ki), (p4+p5)^2
+  * s56 -- a real (type ki), (p5+p6)^2
+  * s61 -- a real (type ki), (p6+p1)^2
+  * s123 -- a real (type ki), (p1+p2+p3)^2
+  * s234 -- a real (type ki), (p2+p3+p4)^2
+  * s345 -- a real (type ki), (p3+p4+p5)^2
+  * m1 -- a real (type ki), mass^2 of propagator 6
+  * m2 -- a real (type ki), mass^2 of propagator 1
+  * m3 -- a real (type ki), mass^2 of propagator 2
+  * m4 -- a real (type ki), mass^2 of propagator 3
+  * m5 -- a real (type ki), mass^2 of propagator 4
+  * m6 -- a real (type ki), mass^2 of propagator 5
+  * mu2 -- a real (type ki), renormalisation scale squared
+  * eps_flag -- an integer, a flag to select the coefficient in front the power of epsilon
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  It returns a complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2 (eps_flag=-2),
+  the real part, imaginary part of the 1/epsilon term (eps_flag=-1) and the real part,
+  imaginary part of the constant term (eps_flag=0).
+</pre>
+<p class="item_name">USES</p>
+<pre>  * precision (src/module/<a href="../module/precision_golem_f90.html#robo_top_of_doc">precision_golem.f90</a>)
+  * matrice_s, only: set_ref, s_mat, allocation_s, deallocation_s, init_invs (src/kinematic/<a href="../kinematic/matrice_s_f90.html#robo_top_of_doc">matrice_s.f90</a>)
+  * form_factor_type, only: form_factor (src/module/<a href="../module/form_factor_type_f90.html#robo_top_of_doc">form_factor_type.f90</a>)
+  * form_factor_6p (src/form_factor/<a href="../form_factor/form_factor_6p_f90.html#robo_top_of_doc">form_factor_6p.f90</a>)
+  * cache, only: allocate_cache, clear_cache (src/module/<a href="../module/cache_f90.html#robo_top_of_doc">cache.f90</a>)
+  * constante, only : b_null (src/module/<a href="../module/constante_f90.html#robo_top_of_doc">constante.f90</a>)
+  * sortie_erreur, only : tab_erreur_par,catch_exception (src/module/<a href="../module/sortie_erreur_f90.html#robo_top_of_doc">sortie_erreur.f90</a>)
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2finterface2fgf0i"></a>
+<a name="robo643"></a><h2>src/interface/gf0i [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function gf0i
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex = gf0i(idt,s1,s2,s3,s4,s5,s6,s12,s23,s34,s45,s56,s61,s123,s234,s345,m1,m2,m3,m4,m5,m6,mu2,eps_flag)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function is the LoopTools F0i function. 
+  The first argument is a character of length &lt;= 8
+  There are two arguments more which are the renormalisation 
+  scale squared and a flag which selects the coefficient of 
+  the Laurent series in epsilon
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * idt -- a character of length &lt;= 8, the type of form factors
+  * s1 -- a real (type ki), p1^2
+  * s2 -- a real (type ki), p2^2
+  * s3 -- a real (type ki), p3^2
+  * s4 -- a real (type ki), p4^2
+  * s5 -- a real (type ki), p5^2
+  * s6 -- a real (type ki), p6^2
+  * s12 -- a real (type ki), (p1+p2)^2
+  * s23 -- a real (type ki), (p2+p3)^2
+  * s34 -- a real (type ki), (p3+p4)^2
+  * s45 -- a real (type ki), (p4+p5)^2
+  * s56 -- a real (type ki), (p5+p6)^2
+  * s61 -- a real (type ki), (p6+p1)^2
+  * s123 -- a real (type ki), (p1+p2+p3)^2
+  * s234 -- a real (type ki), (p2+p3+p4)^2
+  * s345 -- a real (type ki), (p3+p4+p5)^2
+  * m1 -- a real (type ki), mass of propagator 6
+  * m2 -- a real (type ki), mass of propagator 1
+  * m3 -- a real (type ki), mass of propagator 2
+  * m4 -- a real (type ki), mass of propagator 3
+  * m5 -- a real (type ki), mass of propagator 4
+  * m6 -- a real (type ki), mass of propagator 5
+  * mu2 -- a real (type ki), renormalisation scale squared
+  * eps_flag -- an integer, a flag to select the coefficient in front the power of epsilon
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  It returns a complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2 (eps_flag=-2),
+  the real part, imaginary part of the 1/epsilon term (eps_flag=-1) and the real part,
+  imaginary part of the constant term (eps_flag=0).
+</pre>
+<p class="item_name">USES</p>
+<pre>  * precision (src/module/<a href="../module/precision_golem_f90.html#robo_top_of_doc">precision_golem.f90</a>)
+  * matrice_s, only: set_ref, s_mat, allocation_s, deallocation_s, init_invs (src/kinematic/<a href="../kinematic/matrice_s_f90.html#robo_top_of_doc">matrice_s.f90</a>)
+  * form_factor_type, only: form_factor (src/module/<a href="../module/form_factor_type_f90.html#robo_top_of_doc">form_factor_type.f90</a>)
+  * form_factor_6p (src/form_factor/<a href="../form_factor/form_factor_6p_f90.html#robo_top_of_doc">form_factor_6p.f90</a>)
+  * cache, only: allocate_cache, clear_cache (src/module/<a href="../module/cache_f90.html#robo_top_of_doc">cache.f90</a>)
+  * constante, only : b_null (src/module/<a href="../module/constante_f90.html#robo_top_of_doc">constante.f90</a>)
+  * tool_lt_to_golem, only : extract (src/interface/<a href="./tool_lt_to_golem_f90.html#robo_top_of_doc">tool_lt_to_golem.f90</a>)
+  * sortie_erreur, only : tab_erreur_par,catch_exception (src/module/<a href="../module/sortie_erreur_f90.html#robo_top_of_doc">sortie_erreur.f90</a>)
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./../src/interface/gf0.f90 with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.42 on Fri Dec 13 2013 22:31:47
+</p>
+</div> <!-- footer -->
+</body>
+</html>

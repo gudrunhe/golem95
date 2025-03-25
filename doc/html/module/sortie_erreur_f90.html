@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="../robodoc.css" type="text/css" />
+<title>./../src/module/sortie_erreur.f90</title>
+<!-- Source: ./../src/module/sortie_erreur.f90 -->
+<!-- Generated with ROBODoc Version 4.99.42 (Dec 13 2013) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="../toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="../robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="../masterindex.html#top">Index</a>
+<a class="menuitem" href="../robo_generics.html#top">Generics</a>
+<a class="menuitem" href="../robo_functions.html#top">Functions</a>
+<a class="menuitem" href="../robo_modules.html#top">Modules</a>
+<a class="menuitem" href="../robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="src2fmodule2fsortie5ferreur"></a>
+<a name="robo62"></a><h2>src/module/sortie_erreur [ Modules ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_modules.html#robo_top_of_doc">Modules</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Module sortie_erreur
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  use sortie_erreur
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This module is used to generate error exception or to print some information from
+  a function/subroutine
+</pre>
+<p class="item_name">OUTPUT</p>
+<pre>  This module exports:
+  * erreur -- derived type
+  * tab_erreur_par -- an array of 7 derived type erreur
+  * catch_exception -- a subroutine to perform an action depending on the level
+  * print_type -- a subroutine to print the type erreur
+</pre>
+<p class="item_name">USES</p>
+<pre>  * precision_golem (src/module/<a href="./precision_golem_f90.html#robo_top_of_doc">precision_golem.f90</a>)
+  * parametre (src/module/<a href="./parametre_f90.html#robo_top_of_doc">parametre.f90</a>)
+  * array (src/module/<a href="./array_f90.html#robo_top_of_doc">array.f90</a>)
+</pre>
+
+<hr />
+<a name="src2fmodule2fsortie5ferreur2fcatch5fexception"></a>
+<a name="robo860"></a><h2>src/module/sortie_erreur/catch_exception [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Subroutine catch_exception
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  call catch_exception(level)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  For the error exception
+  This routine prints on the unit 0 (stderr for fortran)  
+  the array tab_erreur_par 
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * level -- a integer : 0 the program stops, 1 warning, 2 info
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  write on the unit 0 (stderr for fortran) : level=0,1
+  or write on the unit 12 : level=2 
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fmodule2fsortie5ferreur2ferreur"></a>
+<a name="robo861"></a><h2>src/module/sortie_erreur/erreur [ Types ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_types.html#robo_top_of_doc">Types</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>   erreur -- derived type, to print error/info 
+</pre>
+<p class="item_name">SYNOPSIS</p>
+<pre class="source">  !   type erreur
+</pre>
+<p class="item_name">SOURCE</p>
+<pre class="source">  type erreur
+    !
+    character(len=256) :: chaine
+    logical :: a_imprimer = .false.
+    integer :: arg_int
+    real(ki) :: arg_real
+    complex(ki) :: arg_comp
+    character(len=32) :: arg_char
+    integer, dimension(2) :: arg_int_tab
+    !
+  end type erreur
+</pre>
+<p class="item_name">NOTES</p>
+<pre>   * set erreur%a_imprimer = .true. to print it
+   * arg_in_tab(1) : packb(tab), arg_int_tab(2) : size(tab)
+</pre>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./../src/module/sortie_erreur.f90 with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.42 on Fri Dec 13 2013 22:31:47
+</p>
+</div> <!-- footer -->
+</body>
+</html>

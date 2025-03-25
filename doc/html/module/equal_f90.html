@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="../robodoc.css" type="text/css" />
+<title>./../src/module/equal.f90</title>
+<!-- Source: ./../src/module/equal.f90 -->
+<!-- Generated with ROBODoc Version 4.99.42 (Dec 13 2013) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="../toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="../robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="../masterindex.html#top">Index</a>
+<a class="menuitem" href="../robo_generics.html#top">Generics</a>
+<a class="menuitem" href="../robo_functions.html#top">Functions</a>
+<a class="menuitem" href="../robo_modules.html#top">Modules</a>
+<a class="menuitem" href="../robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="src2fmodule2fequal"></a>
+<a name="robo54"></a><h2>src/module/equal [ Modules ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_modules.html#robo_top_of_doc">Modules</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Module equal
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  use equal
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This module is used to compare two objects
+</pre>
+<p class="item_name">OUTPUT</p>
+<pre>  This module exports two functions:
+  * equal_real -- to compare two reals
+  * cut_s -- sets the momentum s equal to zero, if the ratio s/M or the absoulute value
+             is smaller than some global parameters.
+</pre>
+<p class="item_name">USES</p>
+<pre>  * precision_golem (src/module/<a href="./precision_golem_f90.html#robo_top_of_doc">precision_golem.f90</a>)
+  * parametre (src/module/<a href="./parametre_f90.html#robo_top_of_doc">parametre.f90</a>)
+  * constante (src/module/<a href="./constante_f90.html#robo_top_of_doc">constante.f90</a>)
+  * sortie_erreur (src/module/<a href="./sortie_erreur_f90.html#robo_top_of_doc">sortie_erreur.f90</a>)
+</pre>
+
+<hr />
+<a name="src2fmodule2fequal2fcut5fs"></a>
+<a name="robo831"></a><h2>src/module/equal/cut_s [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  subroutine cut_s
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  call cut_s(s,m1,m2)
+  call cut_s(s,m)
+  call cut_s(s)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function sets s to zero, if either of the following conditions is fulfilled.
+  abs(s) is smaller than cut_s_abs.
+  abs(s/Sum(m)) is smaller than cut_s_over_m.
+  Calling this routine improves stability in the form factor calculations.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * s -- a real of type ki
+  * m, m1, m2 -- real/complex type
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  Possible change of s to zero.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fmodule2fequal2fequal5freal"></a>
+<a name="robo832"></a><h2>src/module/equal/equal_real [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function equal_real
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  logical = equal_real(xa,xb,echelle)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function compares two real (of same kind) by computing their 
+  difference and compares it to epsilon (of the same kind)
+  true if | xa - xb | &lt;= echelle*epsilon, false otherwise
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * xa -- a real of type ki
+  * xb -- a real of type ki
+  * echelle -- a real of type ki (optional)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  It returns a logical
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./../src/module/equal.f90 with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.42 on Fri Dec 13 2013 22:31:47
+</p>
+</div> <!-- footer -->
+</body>
+</html>

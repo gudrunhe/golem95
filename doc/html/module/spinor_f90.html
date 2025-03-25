@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="../robodoc.css" type="text/css" />
+<title>./../src/module/spinor.f90</title>
+<!-- Source: ./../src/module/spinor.f90 -->
+<!-- Generated with ROBODoc Version 4.99.42 (Dec 13 2013) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="../toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="../robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="../masterindex.html#top">Index</a>
+<a class="menuitem" href="../robo_generics.html#top">Generics</a>
+<a class="menuitem" href="../robo_functions.html#top">Functions</a>
+<a class="menuitem" href="../robo_modules.html#top">Modules</a>
+<a class="menuitem" href="../robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="src2fmodule2fspinor"></a>
+<a name="robo63"></a><h2>src/module/spinor [ Modules ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_modules.html#robo_top_of_doc">Modules</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Module spinor
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  use spinor
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This module contains all the function to compute the spinorial products,
+  scalar products and epsilon_tensor
+</pre>
+<p class="item_name">OUTPUT</p>
+<pre>  It exports:
+  * ket -- a function to compute the ket spinor
+  * bra -- a function to compute the bra spinor
+  * pslash -- a function to compute p^{\mu} \gamma_{\mu}
+  * bra_ket -- a function to compute the spinorial product
+  * eps_prod_sca -- a function to compute the scalar product e_i.p_j
+  * eps_prod_eps -- a function to compute the scalar product e_i.e_j
+  * scalar -- a function to compute the scalar product
+  * e_ -- a function to compute the epsilon tensor
+</pre>
+<p class="item_name">USES</p>
+<pre>  * precision_golem (src/module/<a href="./precision_golem_f90.html#robo_top_of_doc">precision_golem.f90</a>)
+</pre>
+
+<hr />
+<a name="src2fmodule2fspinor2fbra"></a>
+<a name="robo862"></a><h2>src/module/spinor/bra [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function bra
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex_dim1_4 = bra(p,i)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function computes the spinor bra using 
+  bra(p) = ket(p)^{\dagger} \gamma_0
+  modified for non physical configuration p_0 &lt; 0.
+  The functions bra and ket verify the conditions:
+  &lt;-p-|q+&gt; = &lt;p-|-q+&gt; = i &lt;p-|q+&gt;
+  &lt;-p+|q-&gt; = &lt;p+|-q-&gt; = i &lt;p+|q-&gt;
+  &lt;-p-|-q+&gt; = - &lt;p-|q+&gt;
+  &lt;-p+|-q-&gt; = - &lt;p+|q-&gt;
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * p -- a real array (type ki) of rank 1, shape 4; a 4-momentum
+  * i -- an integer, the value of the helicity (= 1,-1)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect (pure function)
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  It returns a complex array (type ki) of rank 2 and shape 1,4
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fmodule2fspinor2fbra5fket"></a>
+<a name="robo863"></a><h2>src/module/spinor/bra_ket [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function bra_ket
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex = bra_ket(p1,i1,p2,i2,k1,k2,k3,k4,k5,k6,k7,k8,k9,k10)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function computes &lt;p1 i1|k1slash*k2slash*...*k10slash|p2 i2&gt;
+  i1 and i2 = +/- 1 are the helicities
+  where the inner argument k1slash,k2slash,...,k10slash are optional
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * p1 -- a real array (type ki) of rank 1, shape 4; a 4-momentum
+  * i1 -- an integer, the value of the helicity (= 1,-1)
+  * p2 -- a real array (type ki) of rank 1, shape 4; a 4-momentum
+  * i2 -- an integer, the value of the helicity (= 1,-1)
+  * k1 -- a real array (type ki) of rank 1, shape 4; a 4-momentum optional
+  * k2 -- a real array (type ki) of rank 1, shape 4; a 4-momentum optional
+  * k3 -- a real array (type ki) of rank 1, shape 4; a 4-momentum optional
+  * k4 -- a real array (type ki) of rank 1, shape 4; a 4-momentum optional
+  * k5 -- a real array (type ki) of rank 1, shape 4; a 4-momentum optional
+  * k6 -- a real array (type ki) of rank 1, shape 4; a 4-momentum optional
+  * k7 -- a real array (type ki) of rank 1, shape 4; a 4-momentum optional
+  * k8 -- a real array (type ki) of rank 1, shape 4; a 4-momentum optional
+  * k9 -- a real array (type ki) of rank 1, shape 4; a 4-momentum optional
+  * k10 -- a real array (type ki) of rank 1, shape 4; a 4-momentum optional
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect (pure function)
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  It returns a complex (type ki)
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fmodule2fspinor2fe5f"></a>
+<a name="robo864"></a><h2>src/module/spinor/e_ [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function e_
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex = e_(k1,k2,k3,k4)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function gives the antisymetric tensor epsilon
+  From Thomas Reiter
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * k1 -- a real array (type ki) of rank 1, shape 4; a 4-momentum
+  * k2 -- a real array (type ki) of rank 1, shape 4; a 4-momentum
+  * k3 -- a real array (type ki) of rank 1, shape 4; a 4-momentum
+  * k4 -- a real array (type ki) of rank 1, shape 4; a 4-momentum
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect (pure function)
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  It returns a complex (type ki)
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fmodule2fspinor2feps5fprod5feps"></a>
+<a name="robo865"></a><h2>src/module/spinor/eps_prod_eps [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function eps_prod_eps
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex = eps_prod_eps(i1,r1,p1,i2,r2,p2)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function computes e^i(p1).e^j(p) where r1 is the reference momemtum 
+  for e(p1) and  r2 is the reference momemtum for e(p2)
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * i1 -- an integer, the value of the helicity (= 1,-1)
+  * r1 -- a real array (type ki) of rank 1, shape 4; the refrence momentum
+  * p1 -- a real array (type ki) of rank 1, shape 4; the momentum of the spin 1
+  * i2 -- an integer, the value of the helicity (= 1,-1)
+  * r2 -- a real array (type ki) of rank 1, shape 4; the refrence momentum
+  * p2 -- a real array (type ki) of rank 1, shape 4; the momentum of the spin 1
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect (pure function)
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  It returns a complex (type ki)
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fmodule2fspinor2feps5fprod5fsca"></a>
+<a name="robo866"></a><h2>src/module/spinor/eps_prod_sca [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function eps_prod_sca
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex = eps_prod_sca(i,r1,p1,p2)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function computes e^i(p1).p2 where r1 is the reference momentum
+  be careful that p2 is assumed to be a lightlike vector
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * i -- an integer, the value of the helicity (= 1,-1)
+  * r1 -- a real array (type ki) of rank 1, shape 4; the refrence momentum
+  * p1 -- a real array (type ki) of rank 1, shape 4; the momentum of the spin 1
+  * p2 -- a real array (type ki) of rank 1, shape 4; a 4-momentum
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect (pure function)
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  It returns a complex (type ki)
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fmodule2fspinor2fket"></a>
+<a name="robo867"></a><h2>src/module/spinor/ket [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function ket
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex_dim4_1 = ket(p,i)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function computes the spinor using the chinese's paper
+  Nucl. Phys. B291 (1987) 392-428 equation A.16
+  modified for non physical configuration E &lt; 0.
+  The functions bra and ket verify the conditions:
+  &lt;-p-|q+&gt; = &lt;p-|-q+&gt; = i &lt;p-|q+&gt;
+  &lt;-p+|q-&gt; = &lt;p+|-q-&gt; = i &lt;p+|q-&gt;
+  &lt;-p-|-q+&gt; = - &lt;p-|q+&gt;
+  &lt;-p+|-q-&gt; = - &lt;p+|q-&gt;
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * p -- a real array (type ki) of rank 1, shape 4; a 4-momentum
+  * i -- an integer, the value of the helicity (= 1,-1)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect (pure function)
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  It returns a complex array (type ki) of rank 2 and shape 4,1
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fmodule2fspinor2fpslash"></a>
+<a name="robo868"></a><h2>src/module/spinor/pslash [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function pslash
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex_dim4_4 = pslash(p)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function computes p_{\mu} \gamma^{\mu}, i.e.
+  p0 gamma0 - p1 gamma1 - p2 gamma2 - p3 gamma3
+  taking the Chinese convention for the gamma matrices in
+  Weyl representation
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * p -- a real array (type ki) of rank 1, shape 4; a 4-momentum
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect (pure function)
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  It returns a complex array (type ki) of rank 2 and shape 4,4
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fmodule2fspinor2fscalar"></a>
+<a name="robo869"></a><h2>src/module/spinor/scalar [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function scalar
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  real = scalar(p1,p2)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function compute the scalar product of two 4 momentum
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * p1 -- a real array (type ki) of rank 1, shape 4; a 4-momentum
+  * p2 -- a real array (type ki) of rank 1, shape 4; a 4-momentum
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect (pure function)
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  It returns a real (type ki)
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./../src/module/spinor.f90 with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.42 on Fri Dec 13 2013 22:31:47
+</p>
+</div> <!-- footer -->
+</body>
+</html>

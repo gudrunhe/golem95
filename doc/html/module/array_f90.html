@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="../robodoc.css" type="text/css" />
+<title>./../src/module/array.f90</title>
+<!-- Source: ./../src/module/array.f90 -->
+<!-- Generated with ROBODoc Version 4.99.42 (Dec 13 2013) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="../toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="../robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="../masterindex.html#top">Index</a>
+<a class="menuitem" href="../robo_generics.html#top">Generics</a>
+<a class="menuitem" href="../robo_functions.html#top">Functions</a>
+<a class="menuitem" href="../robo_modules.html#top">Modules</a>
+<a class="menuitem" href="../robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="src2fmodule2farray"></a>
+<a name="robo49"></a><h2>src/module/array [ Modules ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_modules.html#robo_top_of_doc">Modules</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Module array
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  use array
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This module contains six functions which enable set manipulations knowing that
+  a set of integers is represented with the digits of an integer. The six functions
+  are : packb, unpackb, pminus, punion, countb and locateb
+</pre>
+<p class="item_name">OUTPUT</p>
+<pre>  This module exports six functions:
+
+  * packb -- to transform a set of integers into an integer (unique transformation)
+  * unpackb -- to perform the inverse operation as packb do
+  * pminus -- to subtract two sets
+  * punion -- to add two sets
+  * countb -- to count the number of element of the set
+  * locateb -- to give the location of an element in a set
+</pre>
+<p class="item_name">USES</p>
+<pre>  none
+</pre>
+
+<hr />
+<a name="src2fmodule2fcountb"></a>
+<a name="robo828"></a><h2>src/module/countb [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function countb
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  integer = countb(bits)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function computes the shape of the rank 1 integer 
+  set given by unpackb(bits,dim)
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * bits -- an integer
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect (pure function)
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  an integer 
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre>  i1 = packb( (/1,2,3/) )
+  i2 = countb(i1)
+  i2 is 3
+</pre>
+
+<hr />
+<a name="src2fmodule2flocateb"></a>
+<a name="robo843"></a><h2>src/module/locateb [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function locateb
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  integer = locateb(i,bits)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  The function locateb returns the location of the element i  
+  in the set given by unpackb(bits,countb(bits)). 
+  If i does not belong to bits, the function locateb 
+  returns -1
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * i -- an integer, the element of a
+  * bits -- an integer
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect (elemental)
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  It returns an integer, the location of i in the array a
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre>  bits = packb( (/3,5,6,7/) )
+  j = locateb(5,bits) --&gt; j is equal to 2
+  j = locateb(6,bits) --&gt; j is equal to 3
+  j = locateb(4,bits) --&gt; j is equal to -1
+  Note that if the set is not ordered, the packing
+  orders it.
+  Note also that this function has the attribute elemental
+  that means that, the argument can be a set of integers:
+  locateb( (/3,7/) , bits) will return (/1,4/)
+</pre>
+
+<hr />
+<a name="src2fmodule2fpackb"></a>
+<a name="robo851"></a><h2>src/module/packb [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function packb
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  integer = packb(set)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function transforms a set of integers into
+  an integer, this integer is unique
+ Apparently Fortran allows to use arrays
+ for the second argument which saves us a loop.
+
+ The elements in set have to be &lt;= 31 which should
+ not be a problem for realistic applications.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * set -- a set of integer
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect (pure function)
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  an integer 
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre>  i = packb( (/1,2,3/) ) 
+  i is 14 which is in binary base 1110
+</pre>
+
+<hr />
+<a name="src2fmodule2fpminus"></a>
+<a name="robo852"></a><h2>src/module/pminus [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function pminus
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  integer = pminus(bits1,bits2)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function subtracts the set which is 
+  represented by bits2 to the one that is 
+  represented by bits1. If the two sets set1 and set2
+  are defined by set1=unpackb(bits1,dim1)
+  and set2=unpackb(bits2,dim2), then ib = pminus(bits1,bits2)
+  gives an integer such that unpackb(ib,dim_ib) is the set
+  of integers of shape dim1-dim2 (dim1 &gt; dim2) which contains
+  the elements of set1 which do not belong to set2
+  Note that if dim1 &lt; dim2, the result returns is pminus(bits2,bits1)
+  If none of the elements of set2 belongs to set1, then 
+  pminus(bits1,bits2) = bits1
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * bits1 -- an integer
+  * bits2 -- an integer
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect (pure function)
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  an integer 
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre>  i1 = packb( (/1,2,3/) ) 
+  i2 = packb( (/2/) )
+  i3 = pminus(i1,i2)
+  unpackb(i3) is the set (/1,3/)
+</pre>
+
+<hr />
+<a name="src2fmodule2fpunion"></a>
+<a name="robo854"></a><h2>src/module/punion [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function punion
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  integer = punion(bits1,bits2)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function adds the set which is 
+  represented by bits2 to the one that is 
+  represented by bits1. If the two sets set1 and set2
+  are defined by set1=unpackb(bits1,dim1)
+  and set2=unpackb(bits2,dim2), then ib = punion(bits1,bits2)
+  gives an integer such that unpackb(ib,dim_ib) is the set
+  of integers of shape dim1+dim2 which contains
+  the elements of set1 and those of set2
+  Note that if some elements of set2 belong to set1, they do not
+  appear twice
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * bits1 -- an integer
+  * bits2 -- an integer
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect (pure function)
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  an integer 
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre>  i1 = packb( (/1,3,4/) ) 
+  i2 = packb( (/2/) )
+  i3 = punion(i1,i2)
+  unpackb(i3) is the set (/1,2,3,4/)
+</pre>
+
+<hr />
+<a name="src2fmodule2funpackb"></a>
+<a name="robo874"></a><h2>src/module/unpackb [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function unpackb
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  integer_set = unpackb(bits,dim)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function performs the inverse operation
+  as packb does : from an integer, it reconstructs the
+  set of integers
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * bits -- an integer
+  * dim -- an integer, the dimension of the set obtained
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect (pure function)
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  an integer array of rank 1 and shape dim
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre>  set = unpackb( 14 ) 
+  set is (/1,2,3/) because the binary representation of 14 is 1110
+</pre>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./../src/module/array.f90 with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.42 on Fri Dec 13 2013 22:31:47
+</p>
+</div> <!-- footer -->
+</body>
+</html>

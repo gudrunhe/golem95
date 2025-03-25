@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="../../robodoc.css" type="text/css" />
+<title>./../src/integrals/four_point/function_4p_ql12.f90</title>
+<!-- Source: ./../src/integrals/four_point/function_4p_ql12.f90 -->
+<!-- Generated with ROBODoc Version 4.99.42 (Dec 13 2013) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="../../toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="../../robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="../../masterindex.html#top">Index</a>
+<a class="menuitem" href="../../robo_generics.html#top">Generics</a>
+<a class="menuitem" href="../../robo_functions.html#top">Functions</a>
+<a class="menuitem" href="../../robo_modules.html#top">Modules</a>
+<a class="menuitem" href="../../robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="src2fintegrals2ffour5fpoint2ffunction5f4p5fql12"></a>
+<a name="robo26"></a><h2>src/integrals/four_point/function_4p_ql12 [ Modules ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../../robo_modules.html#robo_top_of_doc">Modules</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Module function_4p_ql12
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  use function_4p_ql12
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This module computes the n-dimensional four point function
+  corresponding to QCDLoop box number 12
+  implemented only without Feynman parameters in the numerator!
+</pre>
+<p class="item_name">OUTPUT</p>
+<pre>  This module exports the functions f4p_ql12, f4p_ql12_c 
+  all the other subroutines/functions of this module are private
+</pre>
+<p class="item_name">USES</p>
+<pre>  * precision (src/module/<a href="../../module/precision_golem_f90.html#robo_top_of_doc">precision_golem.f90</a>)
+  * numerical_evaluation (src/numerical/<a href="../../numerical/mod_numeric_f90.html#robo_top_of_doc">mod_numeric.f90</a>)
+  * dilogarithme (src/module/<a href="../../module/zdilog_f90.html#robo_top_of_doc">zdilog.f90</a>)
+  * logarithme (src/module/<a href="../../module/z_log_f90.html#robo_top_of_doc">z_log.f90</a>)
+  * constante (src/module/<a href="../../module/constante_f90.html#robo_top_of_doc">constante.f90</a>)
+  * parametre (src/module/<a href="../../module/parametre_f90.html#robo_top_of_doc">parametre.f90</a>)
+  * array (src/module/<a href="../../module/array_f90.html#robo_top_of_doc">array.f90</a>)
+  * sortie_erreur (src/module/<a href="../../module/sortie_erreur_f90.html#robo_top_of_doc">sortie_erreur.f90</a>)
+  * generic_function_3p (src/integrals/three_point/<a href="../three_point/generic_function_3p_f90.html#robo_top_of_doc">generic_function_3p.f90</a>)
+  * translate (src/module/<a href="../../module/translate_f90.html#robo_top_of_doc">translate.f90</a>)
+  * more_integ_info (src/module/more_integ_info.f90)
+</pre>
+
+<hr />
+<a name="src2fintegrals2ffour5fpoint2ffunction5f4p5fql122ff4p5fql12"></a>
+<a name="robo581"></a><h2>src/integrals/four_point/function_4p_ql12/f4p_ql12 [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function f4p_ql12
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  real_dim_4 = f4p_ql12(dim,s1,s2,s3,s4,s12,s23,m1s,m2s,m3s,m4s,par1,par2,par3,par4,mu2)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  computes the n-dimensional four point function
+  with 1 internal mass and two massive on-shell legs, 
+  corresponding to QCDLoop box number 6
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * dim -- a character , dim="n" (4-2*eps) - dimensional 
+  * s12 -- a real (type ki), the S matrix element 2,4 +m1s+m2s
+  * s23 -- a real (type ki), the S matrix element 2,3 +m2s+m3s
+  * s1 -- a real (type ki), the S matrix element 1,4
+  * s2 -- a real (type ki), the S matrix element 2,1
+  * s3 -- a real (type ki), the S matrix element 3,2
+  * s4 -- a real (type ki), the S matrix element 4,3
+  * m1s -- a real (type ki), -1/2*the S matrix element 1,1
+  * m2s -- a real (type ki), -1/2*the S matrix element 2,2
+  * m3s -- a real (type ki), -1/2*the S matrix element 3,3
+  * m4s -- a real (type ki), -1/2*the S matrix element 4,4
+  * par1 -- an integer, the label of the fourth Feynman parameter, if none, put 0
+  * par2 -- an integer, the label of the third Feynman parameter, if none, put 0
+  * par3 -- an integer, the label of the second Feynman parameter, if none, put 0
+  * par4 -- an integer, the label of the first Feynman parameter, if none, put 0
+
+  Be careful that, in this function, the arguments par1, par2, par3 and par4
+  are mandatory, otherwise use the generic four point function f4p_np2 (f4p_np4).
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effects
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  this function returns an array of four reals (type ki) corresponding to the 
+  real imaginary part of 1/epsilon coefficient, real, imaginary part of the 
+  finite part (as epsilon --&gt; 0)
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fintegrals2ffour5fpoint2ffunction5f4p5fql122ff4p5fql125fc"></a>
+<a name="robo582"></a><h2>src/integrals/four_point/function_4p_ql12/f4p_ql12_c [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function f4p_ql12_c
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex_dim_4 = f4p_ql12_c(dim,s24,s13,s23,s34,par1,par2,par3,par4,mu2)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function also computes  the function f4p_ql12
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * dim -- a character, dim="n" 
+  * s12 -- a real (type ki), the S matrix element 2,4 +m1s+m2s
+  * s23 -- a real (type ki), the S matrix element 2,3 +m2s+m3s
+  * s1 -- a real (type ki), the S matrix element 1,4
+  * s2 -- a real (type ki), the S matrix element 2,1
+  * s3 -- a real (type ki), the S matrix element 3,2
+  * s4 -- a real (type ki), the S matrix element 4,3
+  * m1s -- a real (type ki), -1/2*the S matrix element 1,1
+  * m2s -- a real (type ki), -1/2*the S matrix element 2,2
+  * m3s -- a real (type ki), -1/2*the S matrix element 3,3
+  * m4s -- a real (type ki), -1/2*the S matrix element 4,4
+  * par1 -- an integer, the label of the fourth Feynman parameter, if none, put 0
+  * par2 -- an integer, the label of the third Feynman parameter, if none, put 0
+  * par3 -- an integer, the label of the second Feynman parameter, if none, put 0
+  * par4 -- an integer, the label of the first Feynman parameter, if none, put 0
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effects
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  this function returns an array of two complexs (type ki) corresponding to the 
+   1/epsilon coefficient and the finite part (as epsilon --&gt; 0)
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre>  see function f4p_ql12
+</pre>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./../src/integrals/four_point/function_4p_ql12.f90 with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.42 on Fri Dec 13 2013 22:31:47
+</p>
+</div> <!-- footer -->
+</body>
+</html>

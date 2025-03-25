@@ -1,0 +1,5 @@
+
+After a successful make in the demos directory, running ./demo_LT should give:
+
+ D0i = (-2.858462627559066E-004,-6.728836349780323E-002)
+     = golem result for finite part of 4point

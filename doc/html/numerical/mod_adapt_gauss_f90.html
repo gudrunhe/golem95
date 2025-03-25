@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="../robodoc.css" type="text/css" />
+<title>./../src/numerical/mod_adapt_gauss.f90</title>
+<!-- Source: ./../src/numerical/mod_adapt_gauss.f90 -->
+<!-- Generated with ROBODoc Version 4.99.42 (Dec 13 2013) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="../toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="../robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="../masterindex.html#top">Index</a>
+<a class="menuitem" href="../robo_generics.html#top">Generics</a>
+<a class="menuitem" href="../robo_functions.html#top">Functions</a>
+<a class="menuitem" href="../robo_modules.html#top">Modules</a>
+<a class="menuitem" href="../robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="src2fnumerical2fadapt5fgauss"></a>
+<a name="robo66"></a><h2>src/numerical/adapt_gauss [ Modules ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_modules.html#robo_top_of_doc">Modules</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Module adapt_gauss (file src/numerical/adapt_gauss.f90)
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  use adapt_gauss
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This module contains several routines for a one dimensional
+  integration using Gauss Kronrod method
+</pre>
+<p class="item_name">OUTPUT</p>
+<pre>  The only subroutine which can be used by use association in adapt_gaus1,
+  all the other subroutines/functions of this module are private
+</pre>
+<p class="item_name">USES</p>
+<pre>  * precision (src/module/<a href="../module/precision_golem_f90.html#robo_top_of_doc">precision_golem.f90</a>)
+  * array (src/module/<a href="../module/array_f90.html#robo_top_of_doc">array.f90</a>)
+  * sortie_erreur (src/module/<a href="../module/sortie_erreur_f90.html#robo_top_of_doc">sortie_erreur.f90</a>)
+</pre>
+
+<hr />
+<a name="src2fnumerical2fadapt5fgauss2fadapt5fgauss1"></a>
+<a name="robo875"></a><h2>src/numerical/adapt_gauss/adapt_gauss1 [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Subroutine adapt_gauss1 (file src/numerical/adapt_gauss.f90)
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  call adapt_gauss1(func,b_inf,b_sup,tol,rest,abserr)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This subroutine performs a one dimensional adaptative integration of the 
+ function func between b_inf and b_sup using a Gaussian quadrature
+ with Kronrod polynomial. The integrand is assumed to be complex.  For a
+ certain criterium (function test_error), the range of integration is split 
+ into two. All the cells are put into a chained list whose element are of 
+ type intervalle 
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  this subroutine takes as inputs:
+  * func -- an external function as declared by the interface block
+  * b_inf -- a real (type ki), the lower bound of the integration range
+  * b_sup -- a real (type ki), the upper bound of the integration range
+  * tol -- a real (type ki), the tolerance asked by the user
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  no side effects
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  it returns:
+  * rest -- a complex (type ki), the result of the integration
+  * abserr -- a complex (type ki), the absolute value of the estimated error
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre>  to integrate a function f
+  between 0 and 1 with a tolerance of 0.0001
+  the result is put in result
+  and the relative error returned in error 
+
+  call adapt_gauss1(f,0._ki,1._ki,1.e-4_ki,result,error)
+</pre>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./../src/numerical/mod_adapt_gauss.f90 with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.42 on Fri Dec 13 2013 22:31:47
+</p>
+</div> <!-- footer -->
+</body>
+</html>

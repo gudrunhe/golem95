@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="../robodoc.css" type="text/css" />
+<title>./../src/module/kronecker.f90</title>
+<!-- Source: ./../src/module/kronecker.f90 -->
+<!-- Generated with ROBODoc Version 4.99.42 (Dec 13 2013) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="../toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="../robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="../masterindex.html#top">Index</a>
+<a class="menuitem" href="../robo_generics.html#top">Generics</a>
+<a class="menuitem" href="../robo_functions.html#top">Functions</a>
+<a class="menuitem" href="../robo_modules.html#top">Modules</a>
+<a class="menuitem" href="../robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="src2fmodule2fkronecker"></a>
+<a name="robo56"></a><h2>src/module/kronecker [ Modules ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_modules.html#robo_top_of_doc">Modules</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Module kronecker
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  use kronecker
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This module contains two functions delta and deltab which correspond 
+  respectively to the Kronecker symbol \delta_{ij}
+  and 1-\delta_{ij}. These two functions have two integer arguments and 
+  return an integer
+</pre>
+<p class="item_name">OUTPUT</p>
+<pre>  This module exports two functions:
+  * delta -- the Kronecker symbol
+  * deltab -- 1-delta
+</pre>
+<p class="item_name">USES</p>
+<pre>  No uses
+</pre>
+
+<hr />
+<a name="src2fmodule2fkronecker2fdelta"></a>
+<a name="robo841"></a><h2>src/module/kronecker/delta [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function delta
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  integer = delta(i,j)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This is the Kronecker symbol \delta_{ij}
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * i -- an integer
+  * j -- an integer
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  It returns an integer 0 or 1
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre>  k = delta(2,3) --&gt; k = 0
+  k = delta(3,3) --&gt; k = 1
+</pre>
+
+<hr />
+<a name="src2fmodule2fkronecker2fdeltab"></a>
+<a name="robo842"></a><h2>src/module/kronecker/deltab [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function deltab
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  integer = deltab(i,j)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This is one minus the Kronecker symbol, 1-\delta_{ij}
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * i -- an integer
+  * j -- an integer
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  It returns an integer 0 or 1
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre>  k = deltab(2,3) --&gt; k = 1
+  k = deltab(3,3) --&gt; k = 0
+</pre>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./../src/module/kronecker.f90 with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.42 on Fri Dec 13 2013 22:31:47
+</p>
+</div> <!-- footer -->
+</body>
+</html>

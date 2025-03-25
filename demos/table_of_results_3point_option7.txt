@@ -1,0 +1,129 @@
+Triangles
+
+After a successful make in the demos directory, run ./demo_3point for the three-point functions, and give 7 when prompted to test 3-point functions with one off-shell leg and two on-shell massive legs (two internal masses, corresponding to QCDLoop triangle 6)
+
+Then inputting the next argument, you should get:
+
+0
+
+1/epsilon^2 * (0.0000000000E+00 + I* 0.0000000000E+00)
++ 1/epsilon * (-.8890625184E-01 + I* 0.4022397214E+00)
++ (-.9491292000E+00 + I* -.3587970428E+00)
+ Check with dedicated function:
+1/epsilon^2 * (0.0000000000E+00 + I* 0.0000000000E+00)
++ 1/epsilon * (-.8890625184E-01 + I* 0.4022397214E+00)
++ (-.9491292000E+00 + I* -.3587970428E+00)
+
+
+1
+
+1/epsilon^2 * (0.0000000000E+00 + I* 0.0000000000E+00)
++ 1/epsilon * (-.8890625184E-01 + I* 0.4022397214E+00)
++ (-.1126941704E+01 + I* 0.4456824000E+00)
+ Check with dedicated function:
+1/epsilon^2 * (0.0000000000E+00 + I* 0.0000000000E+00)
++ 1/epsilon * (-.8890625184E-01 + I* 0.4022397214E+00)
++ (-.1126941704E+01 + I* 0.4456824000E+00)
+
+
+2
+
+1/epsilon^2 * (0.0000000000E+00 + I* 0.0000000000E+00)
++ 1/epsilon * (0.0000000000E+00 + I* 0.0000000000E+00)
++ (0.2279825281E-01 + I* -.1528510941E+00)
+ Check with dedicated function:
+1/epsilon^2 * (0.0000000000E+00 + I* 0.0000000000E+00)
++ 1/epsilon * (0.0000000000E+00 + I* 0.0000000000E+00)
++ (0.2279825281E-01 + I* -.1528510941E+00)
+
+
+3
+
+1/epsilon^2 * (0.0000000000E+00 + I* 0.0000000000E+00)
++ 1/epsilon * (-.8890625184E-01 + I* 0.4022397214E+00)
++ (-.1275118790E+01 + I* 0.1116081936E+01)
+ Check with dedicated function:
+1/epsilon^2 * (0.0000000000E+00 + I* 0.0000000000E+00)
++ 1/epsilon * (-.8890625184E-01 + I* 0.4022397214E+00)
++ (-.1275118790E+01 + I* 0.1116081936E+01)
+
+
+4
+
+1/epsilon^2 * (0.0000000000E+00 + I* 0.0000000000E+00)
++ 1/epsilon * (-.5000000000E+00 + I* 0.0000000000E+00)
++ (-.5016584189E+00 + I* -.4907324601E+00)
+ Check with dedicated function:
+1/epsilon^2 * (0.0000000000E+00 + I* 0.0000000000E+00)
++ 1/epsilon * (-.5000000000E+00 + I* 0.0000000000E+00)
++ (-.5016584189E+00 + I* -.4907324601E+00)
+
+
+5
+
+1/epsilon^2 * (0.0000000000E+00 + I* 0.0000000000E+00)
++ 1/epsilon * (-.1666666667E+00 + I* 0.0000000000E+00)
++ (-.2783305841E+00 + I* -.1635774867E+00)
+ Check with dedicated function:
+1/epsilon^2 * (0.0000000000E+00 + I* 0.0000000000E+00)
++ 1/epsilon * (-.1666666667E+00 + I* 0.0000000000E+00)
++ (-.2783305841E+00 + I* -.1635774867E+00)
+
+
+6
+
+1/epsilon^2 * (0.0000000000E+00 + I* 0.0000000000E+00)
++ 1/epsilon * (-.8890625184E-01 + I* 0.4022397214E+00)
++ (-.9491292000E+00 + I* -.3587970428E+00)
+
+ The preceding result has been computed with mu^2=   1.0000000000000
+ Now setting by hand mu^2=   34.0000000000000
+ and expanding (   34.0000000000000      /   1.0000000000000
+ )^epsilon around epsilon=0
+1/epsilon^2 * (0.0000000000E+00 + I* 0.0000000000E+00)
++ 1/epsilon * (-.8890625184E-01 + I* 0.4022397214E+00)
++ (-.1262644697E+01 + I* 0.1059645232E+01)
+
+ check with direct calculation using the global variable mu2_scale_par=
+   34.0000000000000
+1/epsilon^2 * (0.0000000000E+00 + I* 0.0000000000E+00)
++ 1/epsilon * (-.8890625184E-01 + I* 0.4022397214E+00)
++ (-.1262644697E+01 + I* 0.1059645232E+01)
+
+
+
+7
+
+ result=
+  1/epsilon^2 * (0.0000000000E+00 + I* 0.0000000000E+00)
++ 1/epsilon   * (-.6961644376E-16 + I* 0.0000000000E+00)
++ 1           * (0.1588948600E-02 + I* -.5772944481E-02)
+
+ Check with dedicated function:
+  1/epsilon^2 * (0.0000000000E+00 + I* 0.0000000000E+00)
++ 1/epsilon   * (-.6961644376E-16 + I* 0.0000000000E+00)
++ 1           * (0.1588948600E-02 + I* -.5772944481E-02)
+
+8
+
+ result=
+  1/epsilon^2 * (-.0000000000E+00 + I* -.0000000000E+00)
++ 1/epsilon   * (-.4166666667E-01 + I* -.0000000000E+00)
++ 1           * (-.3125083709E-01 + I* -.3107972247E-01)
+
+ Check with dedicated function:
+  1/epsilon^2 * (-.0000000000E+00 + I* 0.0000000000E+00)
++ 1/epsilon   * (-.4166666667E-01 + I* 0.0000000000E+00)
++ 1           * (-.3125083709E-01 + I* -.3107972247E-01)
+
+9
+
+ result=
+  1/epsilon^2 * (0.0000000000E+00 + I* 0.0000000000E+00)
++ 1/epsilon   * (0.4583333333E+00 + I* 0.0000000000E+00)
++ 1           * (-.3169258551E-01 + I* -.9978226689E-01)
+
+ Check with dedicated function:
+  1/epsilon^2 * (0.0000000000E+00 + I* 0.0000000000E+00)
++ 1/epsilon   * (0.4583333333E+00 + I* 0.0000000000E+00)
++ 1           * (-.3169258551E-01 + I* -.9978226689E-01)

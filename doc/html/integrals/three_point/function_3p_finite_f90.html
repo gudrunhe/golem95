@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="../../robodoc.css" type="text/css" />
+<title>./../src/integrals/three_point/function_3p_finite.f90</title>
+<!-- Source: ./../src/integrals/three_point/function_3p_finite.f90 -->
+<!-- Generated with ROBODoc Version 4.99.42 (Dec 13 2013) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="../../toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="../../robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="../../masterindex.html#top">Index</a>
+<a class="menuitem" href="../../robo_generics.html#top">Generics</a>
+<a class="menuitem" href="../../robo_functions.html#top">Functions</a>
+<a class="menuitem" href="../../robo_modules.html#top">Modules</a>
+<a class="menuitem" href="../../robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="src2fintegral2fthree5fpoint2ffunction5f3pC0i"></a>
+<a name="robo15"></a><h2>src/integral/three_point/function_3pC0i [ Modules ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../../robo_modules.html#robo_top_of_doc">Modules</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Module function_3p_finite
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  use function_3p_finite
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This module is used to compute IR finite three point functions
+  with/without Feynman parameters in n, n+2 dimensions
+</pre>
+<p class="item_name">OUTPUT</p>
+<pre>  This module exports the functions:
+  * f3p_finite, C0  -- functions for the computation of IR finite 
+  three-point functions with/without Feynman parameters in n, n+2 dimensions
+  * f3p_finite_c -- a function which computes the same thing as f3p_finite,  
+    only the format of the return values is different
+</pre>
+<p class="item_name">USES</p>
+<pre>  * precision (src/module/<a href="../../module/precision_golem_f90.html#robo_top_of_doc">precision_golem.f90</a>)
+  * numerical_evaluation (src/numerical/<a href="../../numerical/mod_numeric_f90.html#robo_top_of_doc">mod_numeric.f90</a>)
+  * dilogarithme (src/module/<a href="../../module/zdilog_f90.html#robo_top_of_doc">zdilog.f90</a>)
+  * logarithme (src/module/<a href="../../module/z_log_f90.html#robo_top_of_doc">z_log.f90</a>)
+  * constante (src/module/<a href="../../module/constante_f90.html#robo_top_of_doc">constante.f90</a>)
+  * parametre (src/module/<a href="../../module/parametre_f90.html#robo_top_of_doc">parametre.f90</a>)
+  * array (src/module/<a href="../../module/array_f90.html#robo_top_of_doc">array.f90</a>)
+  * sortie_erreur (src/module/<a href="../../module/sortie_erreur_f90.html#robo_top_of_doc">sortie_erreur.f90</a>)
+  * generic_function_2p (src/integrals/two_point/<a href="../two_point/generic_function_2p_f90.html#robo_top_of_doc">generic_function_2p.f90</a>)
+  * multiply_div (src/module/<a href="../../module/multiply_div_f90.html#robo_top_of_doc">multiply_div.f90</a>)
+  * s_matrix_type (src/module/<a href="../../module/s_matrix_type_f90.html#robo_top_of_doc">s_matrix_type.f90</a>)
+</pre>
+
+<hr />
+<a name="src2fintegral2fthree5fpoint2ffunction5f3p5ffinite2ff3p5ffinite"></a>
+<a name="robo552"></a><h2>src/integral/three_point/function_3p_finite/f3p_finite [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function f3p_finite
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  real_dim4 = f3p_finite(dim,s1,s2,s3,m1,m2,m3,par1,par2,par3)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function computes the IR finite three-point 
+  function in n and n+2 dimensions. 
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * s1 -- a real (type ki), p1^2
+  * s2 -- a real (type ki), p2^2
+  * s3 -- a real (type ki), p3^2
+  * m1 -- a real/complex (type ki), the first mass squared
+  * m2 -- a real/complex (type ki), the second mass squared
+  * m3 -- a real/complex (type ki), the third mass squared
+  * par1 -- an integer, the label of the third Feynman parameter
+  * par2 -- an integer, the label of the second Feynman parameter
+  * par3 -- an integer, the label of the first Feynman parameter
+  Note that par1,par2 and par3 are supposed to be ordered, i.e.
+  par1 &lt;= par2 &lt;= par3, note also that put zero for par1, par2 or par3
+  if this Feynman parameter does not exist.
+  Use the routine tri_int(t_in,t_out) to order the labels in the module 
+  tri_croissant (src/module/<a href="../../module/tri_f90.html#robo_top_of_doc">tri.f90</a>)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  An real (type ki) array of rank 1 and shape 6,
+  where the last two entries corresponding to 
+  the real/imaginary part of the constant term. 
+  the first 4 entries are always zero, but the shape should be 
+  uniform for all triangles called in generic_function_3p
+</pre>
+
+<hr />
+<a name="src2fintegral2fthree5fpoint2ffunction5f3pC0i2fC0"></a>
+<a name="robo553"></a><h2>src/integral/three_point/function_3pC0i/C0 [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre> Function C0
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex = C0(s1,s2,s3,m1,m2,m3)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function computes finite scalar three point functions
+  with internal masses in 4 dimensions
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * s1 -- a real/complex (type ki), p1^2
+  * s2 -- a real/complex (type ki), p2^2
+  * s3 -- a real/complex (type ki), p3^2
+  * m1 -- a real/complex (type ki), the first internal mass squared
+  * m2 -- a real/complex (type ki), the second internal mass squared
+  * m3 -- a real/complex (type ki), the third internal mass squared
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect, it uses the value of rat_or_tot_par 
+  (in src/module/<a href="../../module/parametre_f90.html#robo_top_of_doc">parametre.f90</a>)
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  It returns a complex (type ki)
+</pre>
+
+<hr />
+<a name="src2fintegral2fthree5fpoint2ffunction5f3pC0i2ff3p5ffinite5fc"></a>
+<a name="robo554"></a><h2>src/integral/three_point/function_3pC0i/f3p_finite_c [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function f3p_finite_c
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex_dim2 = f3p_finite_c(s1,s2,s3,m1,m2,m3,par1,par2,par3)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  It computes the same as the function f3p_finite, but the returned
+  value is a complex (type ki) array of rank 1 and shape 2
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * dim -- a character (length 3), to compute in n or n+2 dimensions
+  * s1 -- a real (type ki), p1^2
+  * s2 -- a real (type ki), p2^2
+  * s3 -- a real (type ki), p3^2
+  * m1 -- a real (type ki), the first mass^2
+  * m2 -- a real (type ki), the second mass^2
+  * m3 -- a real (type ki), the third mass^2
+  * par1 -- an integer, the label of the third Feynman parameter
+  * par2 -- an integer, the label of the second Feynman parameter
+  * par3 -- an integer, the label of the first Feynman parameter
+  Note that par1,par2 and par3 are supposed to be ordered, i.e.
+  par1 &lt;= par2 &lt;= par3, note also that put zero for par1, par2 or par3
+  if this Feynman parameter does not exist.
+  Use the routine tri_int(t_in,t_out) to order the labels in the module 
+  tri_croissant (src/module/<a href="../../module/tri_f90.html#robo_top_of_doc">tri.f90</a>)
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  An complex (type ki) array of rank 1 and shape 2 corresponding to 
+  the (real part,imaginary part) of the coefficient of the 1/epsilon term
+  and the (real part,imaginary part) of the constant term. if par1 and/or par2
+  are different from zero for dim="n+2", an error is returned.
+</pre>
+<p class="item_name">EXAMPLE</p>
+<pre>
+
+
+
+
+</pre>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./../src/integrals/three_point/function_3p_finite.f90 with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.42 on Fri Aug 01 2014 14:11:20
+</p>
+</div> <!-- footer -->
+</body>
+</html>

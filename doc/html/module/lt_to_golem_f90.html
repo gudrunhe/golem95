@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="../robodoc.css" type="text/css" />
+<title>./../src/module/lt_to_golem.f90</title>
+<!-- Source: ./../src/module/lt_to_golem.f90 -->
+<!-- Generated with ROBODoc Version 4.99.36 (Jun 27 2008) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="../toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="../robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="../masterindex.html#top">Index</a>
+<a class="menuitem" href="../robo_generics.html#top">Generics</a>
+<a class="menuitem" href="../robo_functions.html#top">Functions</a>
+<a class="menuitem" href="../robo_modules.html#top">Modules</a>
+<a class="menuitem" href="../robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="src2fmodule2flt5fto5fgolem"></a>
+<a name="robo29"></a><h2>src/module/lt_to_golem [ Modules ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_modules.html#robo_top_of_doc">Modules</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Module lt_to_golem
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  use lt_to_golem
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This module contains two functions to have a calling interface between LoopTools
+  and Golem
+</pre>
+<p class="item_name">OUTPUT</p>
+<pre>  This module exports two functions:
+  * d0i -- the LoopTools D0i function, becareful that the first argument is a string 
+           of length 6 and there is a last argument which mu^2
+  * c0i -- the LoopTools C0i function, becareful that the first argument is a string 
+           of length 5 and there is a last argument which mu^2
+</pre>
+<p class="item_name">USES</p>
+<pre>  * precision (src/module/<a href="./preci_double_f90.html#robo_top_of_doc">preci_double.f90</a>)
+  * constante, only : b_null (src/module/<a href="./constante_f90.html#robo_top_of_doc">constante.f90</a>)
+  * matrice_s (src/kinematic/<a href="../kinematic/matrice_s_f90.html#robo_top_of_doc">matrice_s.f90</a>)
+  * form_factor_type (src/module/<a href="./form_factor_type_f90.html#robo_top_of_doc">form_factor_type.f90</a>)
+  * form_factor_3p (src/form_factor/<a href="../form_factor/form_factor_3p_f90.html#robo_top_of_doc">form_factor_3p.f90</a>)
+  * form_factor_4p (src/form_factor/<a href="../form_factor/form_factor_4p_f90.html#robo_top_of_doc">form_factor_4p.f90</a>)
+  * cache (src/module/<a href="./cache_f90.html#robo_top_of_doc">cache.f90</a>)
+  * array, only : packb (src/module/<a href="./array_f90.html#robo_top_of_doc">array.f90</a>)
+  * sortie_erreur (src/module/<a href="./sortie_erreur_f90.html#robo_top_of_doc">sortie_erreur.f90</a>)
+</pre>
+
+<hr />
+<a name="ssrc2fmodule2flt5fto5fgolem2fc0i"></a>
+<a name="robo215"></a><h2>ssrc/module/lt_to_golem/c0i [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function c0i
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex_dim3 = c0i(idt,s1,s2,s3,m1,m2,m3,mu2)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function is the LoopTools C0i function. there are two differences
+  1) the first argument is a character of length 5
+  2) there is one argument more which is the renormalisation scale squared
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * idt -- a character of length 5, the type of form factors
+  * s1 -- a real (type ki), p1^2
+  * s2 -- a real (type ki), p2^2
+  * s3 -- a real (type ki), p3^2
+  * m1 -- a real (type ki), mass of propagator 3
+  * m2 -- a real (type ki), mass of propagator 1
+  * m3 -- a real (type ki), mass of propagator 2
+  * mu2 -- a real (type ki), renormalisation scale squared
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="ssrc2fmodule2flt5fto5fgolem2fd0i"></a>
+<a name="robo216"></a><h2>ssrc/module/lt_to_golem/d0i [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function d0i
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex_dim3 = d0i(idt,s1,s2,s3,s4,s,t,m1,m2,m3,m4,mu2)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function is the LoopTools D0i function. there are two differences
+  1) the first argument is a character of length 6
+  2) there is one argument more which is the renormalisation scale squared
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * idt -- a character of length 6, the type of form factors
+  * s1 -- a real (type ki), p1^2
+  * s2 -- a real (type ki), p2^2
+  * s3 -- a real (type ki), p3^2
+  * s4 -- a real (type ki), p4^2
+  * s -- a real (type ki), (p1+p2)^2
+  * t -- a real (type ki), (p3+p4)^2
+  * m1 -- a real (type ki), mass of propagator 4
+  * m2 -- a real (type ki), mass of propagator 1
+  * m3 -- a real (type ki), mass of propagator 2
+  * m4 -- a real (type ki), mass of propagator 3
+  * mu2 -- a real (type ki), renormalisation scale squared
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  It returns an array of three complex (type ki) corresponding
+  to the real part, imaginary part of the coefficient in front 1/epsilon^2,
+  the real part, imaginary part of the 1/epsilon term and the real part,
+  imaginary part of the constant term.
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./../src/module/lt_to_golem.f90 with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.36 on Thu Oct 30 2008 11:46:11
+</p>
+</div> <!-- footer -->
+</body>
+</html>

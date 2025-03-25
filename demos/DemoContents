@@ -1,0 +1,155 @@
+The demo programs calculate the following examples:
+
+1)  three-point functions
+2)  four-point functions
+3)  five-point functions
+4)  six-point functions
+5)  calculation of 4-photon helicity amplitudes
+6)  numerical stability demo: detG -> 0
+7)  numerical stability demo: detS -> 0
+8)  example how to call Golem form factors using the same 
+    syntax as for LoopTools calls (useful for comparisons)
+9)  examples of Golem form factor calls with complex masses
+10) demo_tens_rec.f90: demonstrates the use of the function 
+    "evaluate" which combines the coefficients obtained by 
+    tensorial reconstruction of the integrand with the 
+    corresponding tensor integrals     
+
+ the items above contains the following options:
+
+1) three-point functions:
+   
+   first, one has to choose the type of triangle,
+   corresponding to the number of off-shell external legs:
+
+  1) one off-shell leg
+  2) two off-shell legs
+  3) three off-shell legs
+
+  for each of the three options above, one can choose to calculate:
+
+  0) scalar three-point function in n dimensions
+  1) three-point function in n dimensions with one Feynman parameter (z1) in the numerator
+  2) three-point function in n dimensions with two Feynman parameters (z1*z2)
+  3) three-point function in n dimensions with three Feynman parameters (z1^2*z3)
+  4) scalar three-point function in n+2 dimensions
+  5) three-point function in n+2 dimensions with one Feynman parameter (z2)
+  6) test of the mu independence'
+  7) three-point function in n dimensions with four Feynman parameters'
+  8) three-point function in n+2 dimensions with two Feynman parameters'
+  9) scalar three-point function in n+4 dimensions'
+
+
+2) four-point functions:
+
+   first, one has to choose the type of box,
+   corresponding to the number of off-shell external legs:
+  
+    1) no off-shell leg
+    2) one off-shell leg
+    3) two opposite off-shell legs
+    4) two adjacent off-shell legs
+    5) three off-shell legs
+    6) four off-shell legs
+
+  for each of the five options above, one can choose to calculate:
+
+   0) scalar four-point function in n dimensions
+   1) four-point function in n dimensions with one Feynman parameter (z1)
+   2) four-point function in n dimensions with two Feynman parameters (z1*z4)
+   3) four-point function in n dimensions with three Feynman parameters (z1^2*z3)
+   4) four-point function in n dimensions with four Feynman parameters (z1*z2*z3*z4)
+   5) scalar four-point function in n+2 dimensions
+   6) four-point function in n+2 dimensions with two Feynman parameters (z1*z2)
+   7) scalar four-point function in n+4 dimensions
+   8) the mu dependence
+   9) four-point fctn. in n dimensions with five Feynman parameters (z1*z2^2*z3^2)
+  10) four-point fctn. in n+2 dimensions with three Feynman parameters (z1*z2^2)
+  11) four-point fctn. in n+4 dimensions with one Feynman parameters (z1)
+  12) four-point fctn. in n+6 dimensions (scalar)
+
+  
+
+3) five-point functions:
+
+ 0) form factor for five-point function, rank 0
+ 1) form factor for five-point function, rank 3 (z1*z2*z4 in numerator)
+ 2) form factor for five-point function, rank 5 (z1*z2*z3*z4*z5 in numerator)
+ 3) form factor for a pinched 5-point diagram (propagator 3 missing), rank 0
+ 4) form factor for a doubly pinched 5-point diagram (propagators 1 and 4 missing), rank 0
+ 5) form factor for five-point function, rank 6 (z1^2*z2*z3*z4*z5 in numerator)
+
+
+4) six-point functions:
+
+  0) form factor for six-point function, rank 0
+  1) form factor for six-point function, rank 4 (z1^2*z2*z3 in numerator)
+  2) form factor A5 for pinched diagram, propagator 3 missing, rank 0
+  3) form factor for double pinched diagram, propagators 2,5 missing, rank 0
+  4) form factor for triple pinched diagram, propagators 2,4,6 missing, rank 0
+  5) form factor for six-point function, rank 7 (z1^2*z2^2*z3^2*z4)
+
+
+5) calculation of 4-photon helicity amplitudes 
+
+  The purpose of this example is to demonstrate how to use golem90 for the 
+  calculation of full amplitudes. 
+  It calculates all three different helicity configurations of the 
+  on-shell 4-photon amplitude for a certain kinematic point.
+
+
+6) numerical stability demo: detG -> 0
+
+   Calculates a rank three 4-point function (in 6 dimensions) 
+   in a region where |B|=detG/detS becomes small, 
+   i.e. where a representation based on the reduction to scalar integrals would fail.
+   The Feynman parameters in the numerator are z1*z2^2.
+   The example follows closely the one described in section 7.2 of 
+   hep-ph/0504267 and is also described in the golem95 manuscript:
+   The program makes 30 iterations where B=-detG/detS becomes smaller in 
+   each  iteration. 
+   The results for real and imaginary parts of I_4^6(z1*z2^2)
+   are written to the file demo_detG.dat as a function of x, 
+   where |B|~x^2 for small x.
+   
+   The files plotDetG_Re.gp and plotDetG_Im.gp can be used to 
+   plot the result with gnuplot by "load 'plotDetG_Re/Im.gp' ".
+   One can see from the plots that 
+   The file demo_detG.txt contains the details of the kinematics 
+   for each iteration.
+   
+   
+7) numerical stability demo: detS -> 0
+
+  tests the rank 5 five-point tensor coefficient A55(1,1,1,1,1) 
+  with respect to its behaviour 
+  when a sub-determinant det S ~ (detG)^2 -> 0.
+  The results for real and imaginary parts of the eps^0 part of A55
+  are written to the file demo_a55_dets_sing.dat as a function 
+  of the transverse momentum of particle 5
+  and can be plotted with gnuplot by "load 'plot_demo_A55.gp' ".
+   
+   
+8)  call of Golem form factors using LoopTools conventions:
+   
+       produces Golem output for N-point functions which can be called 
+       using the same syntax as for LoopTools calls.
+       In Golem the functions E0i,D0i,C0i etc are denoted by
+       gE0i,gD0i,gC0i in order to avoid a name clash 
+       in case the user would like to call Golem and LoopTools 
+       functions within the same program.
+       Example: to calculate a certain 4-point integral 
+       (scalar integrals or tensor coefficients), choose nlegs=4 
+       in demo_LT.f (iep=0 to obtain the finite part) and
+       insert the numerical values for the kinematic point you would like 
+       to calculate (in terms of invariants). 
+       Then the program will calculate  
+       D0i('dd0',p1sq,p2sq,p3sq,p4sq,s12,s23,m1,m2,m3,m4,mu2,iep)
+
+
+NOTE: The numerical points for these demo programs have been fixed 
+      to arbitrarily chosen values.  
+      If the user would like to change these values, he/she has to 
+      edit the files demo_npoint.f90 OR use the files contained 
+      in the subdirectory test/ where the numerical point can be 
+      given as an input  

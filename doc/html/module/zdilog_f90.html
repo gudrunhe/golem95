@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="../robodoc.css" type="text/css" />
+<title>./../src/module/zdilog.f90</title>
+<!-- Source: ./../src/module/zdilog.f90 -->
+<!-- Generated with ROBODoc Version 4.99.42 (Dec 13 2013) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="../toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="../robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="../masterindex.html#top">Index</a>
+<a class="menuitem" href="../robo_generics.html#top">Generics</a>
+<a class="menuitem" href="../robo_functions.html#top">Functions</a>
+<a class="menuitem" href="../robo_modules.html#top">Modules</a>
+<a class="menuitem" href="../robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="src2fmodule2fdilogarithme"></a>
+<a name="robo53"></a><h2>src/module/dilogarithme [ Modules ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_modules.html#robo_top_of_doc">Modules</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Module dilogarithme
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  use dilogarithme
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This module provides two public routines to compute the dilogarithm with
+  real and complex argument
+</pre>
+<p class="item_name">OUTPUT</p>
+<pre>  It exports:
+  * zdilog -- a function which returns the dilogarithm with real (or complex) argument
+  * cdilog -- a function which returns the dilogarithm with complex argument
+</pre>
+<p class="item_name">NOTES</p>
+<pre>  zdilog can be called with complex argument and parameter s. If the imaginary part vanishes,
+  zdilog with real argument is called. Here, s becomes important.
+</pre>
+<p class="item_name">USES</p>
+<pre>  * precision_golem (src/module/precision.f90)
+  * constante (src/module/<a href="./constante_f90.html#robo_top_of_doc">constante.f90</a>)
+  * logarithme (src/module/<a href="./z_log_f90.html#robo_top_of_doc">z_log.f90</a>)
+  * sortie_erreur (src/module/<a href="./sortie_erreur_f90.html#robo_top_of_doc">sortie_erreur.f90</a>)
+  * equal (src/module/<a href="./equal_f90.html#robo_top_of_doc">equal.f90</a>)
+</pre>
+
+<hr />
+<a name="src2fmodule2fdilogarithme2fcdilog"></a>
+<a name="robo829"></a><h2>src/module/dilogarithme/cdilog [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function cdilog
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex = cdilog(z)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function return the dilogarithm of a complex z, taken from T. Binoth
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * z -- a complex (type ki), the argument of the dilogarithm
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  This function returns a complex (type ki)
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fmodule2fdilogarithme2fzdilog"></a>
+<a name="robo830"></a><h2>src/module/dilogarithme/zdilog [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function zdilog
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex = zdilog(a,s)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function returns the dilogarithm of a complex z, this complex number 
+  has the specific form: z = a + i lambda s where lambda &lt;&lt; 1.
+  a can now be complex. If the imaginary part vanishes, the sign of s is relevant.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * a -- a real/complex (type ki), the argument
+  * s -- a real (type ki), s = +/- 1, it gives the sign of the small imaginary part
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  This function returns a complex (type ki)
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./../src/module/zdilog.f90 with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.42 on Fri Dec 13 2013 22:31:47
+</p>
+</div> <!-- footer -->
+</body>
+</html>

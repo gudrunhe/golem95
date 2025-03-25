@@ -1,0 +1,50 @@
+#------------
+# AVH OneLOop
+#------------
+
+URL: http://helac-phegas.web.cern.ch/helac-phegas/OneLOop.html
+
+URL: https://bitbucket.org/hameren/oneloop/commits/branch/master
+
+Version: 3.6.1 +1 commit : 6bbe155cb1cc33d1761f9ca47cfe9d59417c5e13
+
+########################################################################'
+#                                                                      #'
+#                      You are using OneLOop-3.6.1                     #'
+#                                                                      #'
+# for the evaluation of 1-loop scalar 1-, 2-, 3- and 4-point functions #'
+#                                                                      #'
+# author: Andreas van Hameren <hamerenREMOVETHIS@ifj.edu.pl>           #'
+#   date: 16-12-2015                                                   #'
+#                                                                      #'
+# Please cite                                                          #'
+#    A. van Hameren,                                                   #'
+#      Comput.Phys.Commun. 182 (2011) 2427-2438, arXiv:1007.4716       #'
+#    A. van Hameren, C.G. Papadopoulos and R. Pittau,                  #'
+#      JHEP 0909:106,2009, arXiv:0903.4665                             #'
+# in publications with results obtained with the help of this program. #'
+#                                                                      #'
+########################################################################'
+
+The file avh_olo-3.6.1/avh_olo.f90 was generated from the OneLOop source files
+using
+ ./create.py source
+with
+  TLEVEL = yes
+in Config.
+avh_olo_xkinds.f90.in was added and following patch applied
+
+diff --git a/avh_olo.f90 b/avh_olo.f90
+--- a/avh_olo.f90
++++ b/avh_olo.f90
+@@ -78,7 +78,9 @@ end module
+ 
+ 
+ module avh_olo_dp_kinds
+-  integer ,parameter :: kindr2=selected_real_kind(15) 
++  use avh_olo_xkind
++  public :: kindr2
++  integer ,parameter :: kindr2=olo_xkind
+ end module
+ 
+ 

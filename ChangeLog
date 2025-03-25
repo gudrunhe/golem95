@@ -1,0 +1,173 @@
+22.01.2016: Version 1.3.3
+
+Changes:
+* JFvS: Upgrade to avh_olo / OneLOop 3.6.1
+	tens_comb.f90: Do not calculate form factors multiplied by zero.
+	Add different find_grand_plus methods (computation_variant).
+	Improve makefiles for parallel builds - make -jJOBCOUNT should work now.
+
+16.09.2014: Version 1.3.2
+
+Changes:
+* JFvS: Upgrade to avh_olo / OneLOop 3.5
+
+
+1.8.2014: Version 1.3.1 (bugfix release)
+
+Changes:
+* JFvS: Revert function_3p_finite.f90 and mod_gn.f90 to their golem95C-1.2.1
+        version.
+	Fix wrong array size in init_invs_r.
+	Fix uninitialised variable in b55.
+
+13.12.2013: Version 1.3
+
+Changes:
+* JFvS: Higher rank extension merged,
+        formfactors B54, B55 simplified.
+
+* GC: Bug in mod_gn.f90 fixed (pointed out by Andrea Almasy).
+
+* JPG: function_2p_m1m2.f90 and generic_function_2p.f90 cleaned up.
+
+*************************************************************************
+
+
+18.7.2012:
+
+GH: missing mu2-dependence fixed in complex bubble with p^2=0 (i20mm_c) 
+in two-point/function_2p0m_1mi.f90
+
+5.8.11: bug corrected in generic_function_4p.f90 (pointed out by Ioan Wigmore):
+        QCDLoop box 7 also needs to be called if the massive on-shell leg is p4 instead of p3
+
+05.03.2012: 
+
+bug in generic_function_4p.f90 corrected: the case QL box 9 where 
+s2 instead of s1 is the off-shell leg attached to the massless lines 
+was missing. Added as case QL box 9b
+
+01.03.2012:
+
+this version is based on revision 29 of the hepforge svn trunk.
+All changes there have been taken over, except the ones in the 
+massive triangle functions. The latter are still taken from avh_olo.
+avh_olo has been upgraded to version avh_olo-2.2.1.
+The improvements made in the bubbles also have been included here.
+The improvements of Johann Felix in inverse_matrice.f90 and  matrice_s.f90
+are also included
+The tensrec routines are the same as in the hepforge trunk
+
+
+***************************************************************************
+28.1.11:  underscores eliminated in the interface routines 
+          init_golem95, prepare_s_matrix, exit_golem95
+	  to facilitate combination with programs which are not in fortran90
+
+20.01.11:  Option to link LoopTools added
+
+           without LoopTools linked golem95 still contains all 
+	   massive integrals (also for complex masses), 
+	   partly called from avh_olo
+	   
+	   with LoopTools linked and "withlt=.true." defined in 
+	   the file where the integrals are called (or in parametre.f90)
+	   golem95 calls C0 and D0 from 
+	   LoopTools instead of avh_olo
+	   
+*************************************************************************
+22.11.10:    New Changes to the Complex Version
+
+
+Major Changes:
+
+There are now 3 macro functions. These should make the user interface simpler.
+
+init_golem95
+prepare_s_matrix
+exit_golem95
+
+init_golem95(dim,opt_set):
+
+This subroutine calls allocation_s(dim) and initializes the caching system. 
+A pointer s_mat is associated with s_mat_c.
+The user can fill s_mat or s_mat_c
+A switch to the real branch of the library is made in prepare_s_matrix, if
+the user-defined s matrix consists of real values only. 
+The parameter rmass_or_cmass_par is now for internal use only.
+A optional set can be given to number the propagators. 
+The default is (/1,...,dim/). set_ref and b_ref are set accordingly.
+
+prepare_s_matrix():
+
+This routine creates the global object s_mat_p, 
+determines whether s_mat consists only of real values
+and sets rmass_or_cmass_par accordingly. 
+init_inv is called as well as reset_cache. 
+
+exit_golem95():
+
+deallocates all arrays, nullifies all pointers and clears the cache.
+
+
+A typical use of the library is then:
+
+
+call init_golem(dim)
+
+...fill s_mat...
+
+call prepare_s_matrix()
+
+... ask for form factors ...
+
+call exit_golem95()
+
+
+This should make it more user-friendly now. 
+Note that the parameter rmass_or_cmass_par should not be used anymore and
+that s_mat_r is a provate object now.
+
+Other Changes:
+
+--------------
+cut_s(s,m1,m2)
+cut_s(s,m)
+cut_s(s)
+
+I added a function cut_s (in equal.f90). 
+This function can be called for momenta s and associated masses. 
+The function sets s equal to zero, if abs(s) is smaller than cut_s_abs 
+or the ratio abs(s/Sum(M)) is smaller than cut_s_over_m. These parameters
+are set in parametre.f90. 
+The use of this function gives a better stability to the evaulations of 
+3pt and 4pt functions.
+
+--------------
+inverse_s:
+
+I changed the notion of the error from the greville method. It now only finds the max_value for (A*A+ - 1) as is the case in the gauss method.
+(A*A+*A - A) gives a different normalization, which makes it hard to compare it to the gauss-error.
+Furthermore, in case of a failure of the gauss-method, the inverse matrix with the smaller error is now chosen.
+
+--------------
+- fixed big in generic_function_4p
+- added warning for masses with positive imaginary part
+- init_inv can now be called with 1 to 6 dimension. info is printed if dim <=3
+- coupure_1m_2mi is now set in parametre.f90
+- reset the tab_erreurs after a call to catch_exception in sortie_erreur.
+- small cosmetics in generic_function_2p
+- the call to cut_s is implemented in generic_function_234pt
+
+
+*********************************************************************************************************************
+
+16.07.2010: new version including all types of massive integrals 
+                  internal call to avh_olo (A. van Hameren et al, arXiv:0903.4665 [hep-ph]) 
+		  for C0 and D0, included in the package.
+		  no link to LoopTools needed
+19.07.2010: thanks to Tobias: bug in permutation of triangle labels 
+                 in generic_function_3p.f90 corrected, lines 394,407,443
+
+20.7.2010: thanks to Mark: found trouble in Box QL10 in the limit s4->0, s2=s3=m^2 
+                limit now implemented explicitly in function_4p_ql10.f90

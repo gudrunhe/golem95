@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="../robodoc.css" type="text/css" />
+<title>./../src/kinematic/matrice_s.f90</title>
+<!-- Source: ./../src/kinematic/matrice_s.f90 -->
+<!-- Generated with ROBODoc Version 4.99.42 (Dec 13 2013) -->
+</head>
+<body>
+<div id="logo">
+<a name="robo_top_of_doc"></a>
+</div> <!-- logo -->
+<div id="navigation">
+<a class="menuitem" href="../toc_index.html#top">Table of Contents</a>
+<a class="menuitem" href="../robo_sourcefiles.html#top">Sourcefiles</a>
+<a class="menuitem" href="../masterindex.html#top">Index</a>
+<a class="menuitem" href="../robo_generics.html#top">Generics</a>
+<a class="menuitem" href="../robo_functions.html#top">Functions</a>
+<a class="menuitem" href="../robo_modules.html#top">Modules</a>
+<a class="menuitem" href="../robo_types.html#top">Types</a>
+</div> <!-- navigation -->
+<div id="content">
+<hr />
+<a name="src2fkinematic2fmatrice5fs"></a>
+<a name="robo48"></a><h2>src/kinematic/matrice_s [ Modules ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_modules.html#robo_top_of_doc">Modules</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Module matrice_s
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  use matrice_s
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This module is used : to reserve some memory in order to pass the S matrix, its
+  shape, the set of propagator labels; to compute the inverse
+  of S matrix and the related quantities : the b's and sumb, also for all
+  possible reduced matrices. The S matrix is allocated here and also its dimension
+  and it returns the result through the three functions inv_s, b and sumb.
+</pre>
+<p class="item_name">OUTPUT</p>
+<pre>  This module exports five variables:
+  * dim_s -- an integer, the shape of the initial S matrix
+  * set_ref -- an integer array, the set of initial propagators
+  * s_mat_c -- a complex (type ki) array of rank 2, the S matrix.
+  * s_mat_p -- a derived type, including the S matrix for either real or complex masses
+               and integer-bits encoding the positions of masses with non-vanishing Im-part,
+               and vanishing masses.
+  * s_mat -- A pointer associated with s_mat_c. The user can fill s_mat or s_mat_c with complex or
+             real values.
+
+  and also eleven functions:
+  * initgolem95 -- calls allocation_s, initializes the cache, associates s_mat.
+  * allocation_s -- to allocate the required memory
+  * deallocation_s -- to deallocate the used memory
+  * preparesmatrix -- fill s_mat_r with the real part of s_mat_c, sets the bit integers in s_mat_p
+                        calls init_invs.
+  * init_invs -- to fill all the array for the inverse of the S matrix
+                 and the inverse of the reduce S matrix
+  * inv_s -- it contains the inverse of the S matrix
+  * hj -- it contains H matrix (pseudo-inverse of G)
+  * b -- it contains the b coefficients
+  * sumb -- it contains the B coeficient
+  * norma_sumb -- it contains the normalised B coefficient
+  * exitgolem95 -- deallocates memory, clear the cache.
+
+  Only dim_s and set_ref take a value in this module, not the other variables
+</pre>
+<p class="item_name">USES</p>
+<pre>  * precision (src/module/<a href="../module/precision_golem_f90.html#robo_top_of_doc">precision_golem.f90</a>)
+  * sortie_erreur (src/module/<a href="../module/sortie_erreur_f90.html#robo_top_of_doc">sortie_erreur.f90</a>)
+  * cache (src/module/<a href="../module/cache_f90.html#robo_top_of_doc">cache.f90</a>)
+  * inverse_matrice (src/kinematic/<a href="./inverse_matrice_f90.html#robo_top_of_doc">inverse_matrice.f90</a>)
+  * tri_croissant (src/module/tri_croissant.f90)
+  * array (src/module/<a href="../module/array_f90.html#robo_top_of_doc">array.f90</a>)
+  * parametre (src/module/<a href="../module/parametre_f90.html#robo_top_of_doc">parametre.f90</a>)
+  * s_matrix_type (src/module/<a href="../module/s_matrix_type_f90.html#robo_top_of_doc">s_matrix_type.f90</a>)
+</pre>
+
+<hr />
+<a name="src2fkinematic2finversion2fb"></a>
+<a name="robo814"></a><h2>src/kinematic/inversion/b [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function b
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex = b(i,set)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function gives the b coefficients whatever the S matrix dimension (&lt;=6)
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * i -- an integer, label of the b coefficients
+  * set -- an integer array of rank 1, the set of pinch propagators
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  Warning: Now a complex (type ki) is returned! [TK Sep10]
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fkinematic2finversion2fhj"></a>
+<a name="robo815"></a><h2>src/kinematic/inversion/hj [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function hj
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex = hj(i,j,set)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function gives the H matrix (pseudo-inverse of G) (dim=6)
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * i -- an integer, line number
+  * j -- an integer, row number
+  * set -- an integer array of rank 1, the set of pinch propagators
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  Warning: Now a complex (type ki) is returned! [TK Sep10]
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fkinematic2finversion2finit5finvs"></a>
+<a name="robo816"></a><h2>src/kinematic/inversion/init_invs [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Subroutine init_invs
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  call init_invs()
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function comes in two copies for real masses and complex masses.
+ The respective arrays are filled.
+
+ This routine fills the arrays:
+ invs_n, hjj, b_n, sumb_n, norma_sumb_n
+
+ One can print a typical error due to the numerical inversion
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  No input
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  This routine modifies the values of the real or complex arrays
+  invs_n, hjj, b_n, sumb_n, norma_sumb_n
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  No return value
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fkinematic2finversion2finv5fs"></a>
+<a name="robo817"></a><h2>src/kinematic/inversion/inv_s [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function inv_s
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex = inv_s(i,j,set)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This function gives the generic inverse of the S matrix whatever
+  its dimension (&lt;=6)
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * i -- an integer, line number
+  * j -- an integer, row number
+  * set -- an integer array of rank 1, the set of pinch propagators
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  Warning: Now a complex (type ki) is returned! [TK Sep10]
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fkinematic2finversion2fnorma5fsumb"></a>
+<a name="robo818"></a><h2>src/kinematic/inversion/norma_sumb [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function norma_sumb
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex = norma_sumb(set)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function gives the B coefficient whatever the S matrix dimension (&lt;=6)
+ divided by the greatest (in absolute value) element of the S matrix
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * set -- an integer array of rank 1, the set of pinch propagators
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  Warning: Now a complex (type ki) is returned! [TK Sep10]
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fkinematic2finversion2fsumb"></a>
+<a name="robo819"></a><h2>src/kinematic/inversion/sumb [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Function sumb
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  complex = sumb(set)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre> This function gives the B coefficient whatever the S matrix dimension (&lt;=6)
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * set -- an integer array of rank 1, the set of pinch propagators
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  No side effect
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  Warning: Now a complex (type ki) is returned! [TK Sep10]
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fkinematic2fmatrice5fs2fallocation5fs"></a>
+<a name="robo820"></a><h2>src/kinematic/matrice_s/allocation_s [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Subroutine allocation_s
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  call allocation_s(dim)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This subroutine reserves the memory for several internal objects.
+  In case of rmass_or_cmass_par==cmass, there complex copies of each preceding array
+  are also allocated.
+
+  After memory allocation, s_mat_p is then assigned the matrix s_mat_c or s_mat_r,
+  respectively. The corresponding pointers in s_mat_p are associated or nullified.
+  In case a complex matrix is assigned, there will be also a pointer associated with
+  a real matrix, which has entries according to the real part of the complex matrix.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * dim -- an integer, the maximal number of external legs
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  This routine modify the value of the variable dim_s
+  It initialises invs_n, hjj, b_n, sumb_n, norma_sumb_n to zero
+  It associates the global objects s_mat_p with s_mat_r or s_mat_c.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  No return value
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fkinematic2fmatrice5fs2fdeallocation5fs"></a>
+<a name="robo821"></a><h2>src/kinematic/matrice_s/deallocation_s [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Subroutine deallocation_s
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  call deallocation_s()
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This subroutine deallocates the memory reserved by the preceeding
+  subroutine.
+  The pointers in s_mat_p are nullified.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  No input
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre>  This routine destroys all the variables initialised in the
+  preceeding subroutine as well as any associations in s_mat_p.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  No return value
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fkinematic2fmatrice5fs2fexitgolem95"></a>
+<a name="robo822"></a><h2>src/kinematic/matrice_s/exitgolem95 [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Subroutine exitgolem95
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  call exitgolem95()
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This subroutine should be called at the end of the form factor calculation.
+  It frees all memory previously allocated, it clears the cache and nullifies pointers.
+</pre>
+<p class="item_name">INPUTS</p>
+<p class="item_name">SIDE EFFECTS</p>
+<p class="item_name">RETURN VALUE</p>
+<pre>  No return value
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fkinematic2fmatrice5fs2finitgolem95"></a>
+<a name="robo823"></a><h2>src/kinematic/matrice_s/initgolem95 [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Subroutine initgolem95
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  call initgolem95(dim, opt_set)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This subroutine is the first of three macro functions which needs to be called by the user.
+  It allocates memory for all internal matrices needed in subsequent calculations.
+  The caching system is initialized.
+  A pointer s_mat is associated with a complex matrix s_mat_c.
+  This is the s matrix which has to be filled after initgolem95() is called.
+  The argument 'dim' sets the maximal number of external legs.
+  An optional array for the numbering of propagators can be given.
+  The default is set to (/ 1, ... , dim /)
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  * dim -- an integer, the maximal number of external legs
+  * opt_set -- an optional integer array for the numbering of propagators
+</pre>
+<p class="item_name">SIDE EFFECTS</p>
+<pre> A call to allocation_s is made, implying all side effects given there.
+ The caching system is initialized.
+ A pointer 's_mat' is associated with the global matrix s_mat_c.
+ The internal parameter rmass_or_cmass_par is set to cmass. If a purely real
+ s matrix is given by the user it will be set to rmass in the call of
+ preparesmatrix.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  No return value
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+<hr />
+<a name="src2fkinematic2fmatrice5fs2fpreparesmatrix"></a>
+<a name="robo824"></a><h2>src/kinematic/matrice_s/preparesmatrix [ Functions ]</h2>
+
+<p>[ <a href="#robo_top_of_doc">Top</a> ] [ <a href="../robo_functions.html#robo_top_of_doc">Functions</a> ]</p>
+<p class="item_name">NAME</p>
+<pre>  Subroutine preparesmatrix
+</pre>
+<p class="item_name">USAGE</p>
+<pre>  call preparesmatrix()
+  call prepare_s_matrix_local(s_mat_p_loc,set_ref_loc)
+</pre>
+<p class="item_name">DESCRIPTION</p>
+<pre>  This subroutine prepares the global or local s_mat_p object, consisting
+  of pointers to s_mat_c and s_mat_r and integer bits b_cmplx and b_zero.
+  A call to init_invs is made to fill the inverse matrices needed
+  in the form factor calculations.
+  If the user has defined a purely real s matrix, the internal parameter
+  rmass_or_cmass_par is set to rmass and only the real branch of the library
+  is used.
+  In the complex case, form factors which are not affected by complex
+  masses will be called with a sub matrix of s_mat_r, the real part of s_mat_c.
+  The routine also sets the bits for complex mass and zero mass-
+  entries.
+  The subroutine prepare_s_matrix_local is used internally to prepare local type
+  s_matrix_poly objects. This subroutine does not interact with the inverse matrices
+  and the caching system.
+</pre>
+<p class="item_name">INPUTS</p>
+<pre>  For prepare_s_matrix_local, s_mat_p and set_ref need to be given.
+</pre>
+<p class="item_name">RETURN VALUE</p>
+<pre>  No return value
+</pre>
+<p class="item_name">EXAMPLE</p>
+
+</div> <!-- content -->
+<div id="footer">
+<p>Generated from ./../src/kinematic/matrice_s.f90 with <a href="http://www.xs4all.nl/~rfsber/Robo/robodoc.html">ROBODoc</a> V4.99.42 on Fri Dec 13 2013 22:31:47
+</p>
+</div> <!-- footer -->
+</body>
+</html>

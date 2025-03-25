@@ -1,0 +1,63 @@
+# Example robodoc.rc
+#
+items:
+    NAME
+    USAGE
+    DESCRIPTION
+    OUTPUT
+    USES
+    INPUTS
+    SIDE EFFECTS
+    RETURN VALUE
+    EXAMPLE
+    AUTHOR
+    SYNOPSIS
+    NOTES
+    SOURCE
+ignore items:
+    AUTHOR
+item order:
+source items:
+    SYNOPSIS
+preformatted items:
+format items:
+options:
+    --src ../src
+    --doc ./html
+    --html
+    --multidoc
+    --index
+headertypes:
+ignore files:
+    Readme
+    .svn
+    *.bak
+    *~
+    *.in
+accept files:
+    *.f90
+    *.pl
+header markers:
+    !****
+    #****
+remark markers:
+    !
+    #
+end markers:
+    !****
+    #****
+header separate characters:
+    ,
+header ignore characters:
+    [
+remark begin markers:
+    /*
+remark end markers:
+    */
+source line comments:
+    //
+keywords:
+    if
+    do
+    while
+    for
