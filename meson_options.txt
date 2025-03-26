@@ -1,0 +1,7 @@
+option(
+    'precision',
+    type: 'combo', 
+    choices: ['double', 'quadruple', 'intermediate'],
+    value: 'double',
+    description: 'Numerical precision of the used floating point types'
+    )
