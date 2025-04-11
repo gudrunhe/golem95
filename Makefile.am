@@ -68,19 +68,26 @@ EXTRA_DIST = \
 	$(srcdir)/tool/tens_rec/tens.py \
 	makedepend.perl \
 	autogen.sh \
-	#$(srcdir)/test/cleanup.pl \
-	#$(srcdir)/test/Makefile_proto.in \
-	#$(srcdir)/test/makenumerator.pl \
-	#$(srcdir)/test/maketest.pl \
-	#$(srcdir)/test/mask_3point \
-	#$(srcdir)/test/mask_4point \
-	#$(srcdir)/test/mask_5point \
-	#$(srcdir)/test/mask_6point \
-	#$(srcdir)/test/momenta.dat \
-	#$(srcdir)/test/mom_rambo.f \
-	#$(srcdir)/test/param.input \
-	#$(srcdir)/test/Readme
-
+	meson.build \
+	meson_options.txt \
+	install_mod_files.py \
+	$(srcdir)/src/meson.build \
+	$(srcdir)/src/form_factor/meson.build \
+	$(srcdir)/src/higherrank/meson.build \
+	$(srcdir)/src/integrals/meson.build \
+	$(srcdir)/src/integrals/four_point/meson.build \
+	$(srcdir)/src/integrals/one_point/meson.build \
+	$(srcdir)/src/integrals/three_point/meson.build \
+	$(srcdir)/src/integrals/two_point/meson.build \
+	$(srcdir)/src/interface/meson.build \
+	$(srcdir)/src/kinematic/meson.build \
+	$(srcdir)/src/module/meson.build \
+	$(srcdir)/src/numerical/meson.build \
+	$(srcdir)/subprojects \
+	$(srcdir)/subprojects/avh_olo.wrap \
+	$(srcdir)/subprojects/packagefiles/avh_olo/create.py.patch \
+	$(srcdir)/subprojects/packagefiles/avh_olo/install_mod_files.py \
+	$(srcdir)/subprojects/packagefiles/avh_olo/meson.build 
 
 ACLOCAL_AMFLAGS = -I m4
 EXTRA_DIST+=m4

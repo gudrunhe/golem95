@@ -6,6 +6,17 @@ For integrals with massless propagators, it contains a method to evaluate tensor
 
 
 # INSTALLATION
+Two build systems are currently supported for golem95, the original `autotools` system and a modern `meson` system.
+## `meson`
+To install golem95 using `meson`, type the following commands:
+
+```bash
+meson setup build [-Dprecision=<precision>]
+meson install -C build
+```
+where the optional `precision` chooses `double`, `quadruple` or `intermediate`. LoopTools is not supported by `meson`.
+
+## `autotools`
 To install the library without linking LoopTools, type the following command:
 
 ```bash
@@ -118,7 +129,7 @@ follow the instructions in the `Readme` there.
     add the path to `libgolem.so.0` to the `LD_LIBRARY_PATH` environment variable.
     For example, for bash shell:
     ```bash
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${HOME}/golem95_v1.3.3/lib
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${HOME}/golem95_v1.3.4/lib
     ```
 
 
